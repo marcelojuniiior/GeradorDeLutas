@@ -9,6 +9,7 @@ import br.com.me.entidade.Atleta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -23,7 +24,7 @@ public class AtletaDao {
     private PreparedStatement prepararSql;
     private ResultSet resultado;
 
-    public boolean adicionarAtleta(Atleta atleta) {
+    public boolean adicionarAtleta(Atleta atleta) throws SQLException {
 
         String sql = "INSERT INTO atleta(nome, dtnascimento, altura, peso,"
                 + "nacionalidade, estado, categoria, cpf, telefone, campeonato)"
@@ -46,6 +47,9 @@ public class AtletaDao {
             return true;
         } catch (Exception e) {
             System.out.println("Erro ao salvar o Atleta " + e.getMessage());
+        } finally {
+            FabricaConexao.fecharConexao(conexao, prepararSql, null);
+
         }
         return false;
     }

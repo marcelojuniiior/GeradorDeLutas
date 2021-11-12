@@ -7,6 +7,9 @@ package br.com.me.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -14,10 +17,20 @@ import java.sql.DriverManager;
  */
 public class FabricaConexao {
 
-   public static Connection abrirConexao() throws Exception {
+    public static Connection abrirConexao() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/dbcampeonato?useTimezone=true&serverTimezone=America/Sao_Paulo&zeroDateTimeBehavior=convertToNull", 
-                                                            "root", "admin");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/dbcampeonato?useTimezone=true&serverTimezone=America/Sao_Paulo&zeroDateTimeBehavior=convertToNull",
+                "root", "admin");
+    }
+
+    public static void fecharConexao(Connection con, PreparedStatement psmt, ResultSet resultado) throws SQLException {
+
+        con.close();
+        psmt.close();
+        if (resultado != null) {
+            resultado.close();
+        }
+
     }
 
 }
