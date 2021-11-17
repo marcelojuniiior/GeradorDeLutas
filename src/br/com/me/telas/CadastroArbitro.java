@@ -6,11 +6,7 @@
 package br.com.me.telas;
 
 import br.com.me.DAO.ArbitroDao;
-import br.com.me.DAO.AtletaDao;
-import br.com.me.DAO.CampeonatoDao;
 import br.com.me.entidade.Arbitro;
-import br.com.me.entidade.Campeonato;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -222,18 +218,12 @@ public class CadastroArbitro extends javax.swing.JInternalFrame {
         String telefone = varTelefone.getText().trim();
         int ultimoIndiceTelefone = telefone.length() - 1;
         char ultimoValor = telefone.charAt(ultimoIndiceTelefone);
-        if (ultimoValor == '-') {
-            return true;
-        }
-        return false;
+        return ultimoValor == '-';
     }
 
     public boolean validarnome() {
         String nome = varNome.getText().trim();
-        if (nome.equals("") || nome.length() < 3) {
-            return true;
-        }
-        return false;
+        return nome.equals("") || nome.length() < 3;
     }
     public boolean validandocpf() {
         String cpf = varCPF.getText().trim();
@@ -243,17 +233,11 @@ public class CadastroArbitro extends javax.swing.JInternalFrame {
 
     public boolean validandodata() {
         String data = varDtNascimento.getText().trim();
-        if (data.equals("/  /")) {
-            return true;
-        }
-        return false;
+        return data.equals("/  /");
     }
 
     public boolean valiandoCampoMenorQue3vazio(String menorQue3) {
-        if (menorQue3.length() < 3 || menorQue3.equals("")) {
-            return true;
-        }
-        return false;
+        return menorQue3.length() < 3 || menorQue3.equals("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
