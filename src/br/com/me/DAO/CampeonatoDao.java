@@ -22,7 +22,7 @@ public class CampeonatoDao {
     ResultSet resultado;
 
     public boolean criarCampeonato(Campeonato campeonato) {
-        String sql = "INSERT INTO campeonato (nome, logradouro, numero, dtcampeonato, valorinscricao) values (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO campeonato (nome, logradouro, numero, dtcampeonato, valorinscricao, condicao) values (?, ?, ?, ?, ?, ?)";
 
         try {
             conexao = FabricaConexao.abrirConexao();
@@ -32,6 +32,7 @@ public class CampeonatoDao {
             prepararsql.setString(3, campeonato.getNumero());
             prepararsql.setString(4, campeonato.getDtcampeonato());
             prepararsql.setDouble(5, campeonato.getValorinscricao());
+            prepararsql.setBoolean(6, campeonato.isCondicao());
             prepararsql.executeUpdate();
             JOptionPane.showMessageDialog(null, "Campeonato criado com Sucesso");
             return true;

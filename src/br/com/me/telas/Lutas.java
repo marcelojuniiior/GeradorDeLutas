@@ -7,6 +7,7 @@ package br.com.me.telas;
 
 import br.com.me.DAO.ArbitroDao;
 import java.sql.ResultSet;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -19,13 +20,12 @@ public class Lutas extends javax.swing.JInternalFrame {
      */
     public Lutas() {
         initComponents();
-        pesquisandoNoBanco();
         
     }
     public void pesquisandoNoBanco(){
         ArbitroDao arbitroDao = new ArbitroDao();
         ResultSet resultadopesquisa = arbitroDao.pesquisarArbitro();
-        
+        tblArbitros.setModel(DbUtils.resultSetToTableModel(resultadopesquisa));
     }
     public void setarcampos(){
         
@@ -164,6 +164,11 @@ public class Lutas extends javax.swing.JInternalFrame {
 
         btPesquisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/me/icones/icone pesquisar.png"))); // NOI18N
         btPesquisa.setBorder(null);
+        btPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPesquisaActionPerformed(evt);
+            }
+        });
 
         tblAtletas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -236,10 +241,11 @@ public class Lutas extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblArbitros.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblArbitros);
         if (tblArbitros.getColumnModel().getColumnCount() > 0) {
             tblArbitros.getColumnModel().getColumn(0).setResizable(false);
-            tblArbitros.getColumnModel().getColumn(0).setPreferredWidth(15);
+            tblArbitros.getColumnModel().getColumn(0).setPreferredWidth(5);
             tblArbitros.getColumnModel().getColumn(1).setResizable(false);
             tblArbitros.getColumnModel().getColumn(1).setPreferredWidth(250);
             tblArbitros.getColumnModel().getColumn(2).setResizable(false);
@@ -850,6 +856,10 @@ public class Lutas extends javax.swing.JInternalFrame {
     private void var1Luta2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_var1Luta2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_var1Luta2ActionPerformed
+
+    private void btPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisaActionPerformed
+       pesquisandoNoBanco();
+    }//GEN-LAST:event_btPesquisaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

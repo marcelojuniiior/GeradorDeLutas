@@ -18,6 +18,7 @@ public class Campeonato {
     private String numero;
     private String dtcampeonato;
     private Double valorinscricao;
+    private boolean condicao;
 
     public Campeonato() {
     }
@@ -29,8 +30,22 @@ public class Campeonato {
         this.dtcampeonato = dtcampeonato;
         this.valorinscricao = valorinscricao;
     }
+
+    public boolean isCondicao() {
+        return condicao;
+    }
+
+    public void setCondicao(boolean condicao) {
+        this.condicao = condicao;
+    }
+
     
+     
     
+    @Override
+    public String toString() {
+        return this.getNome();
+    }
 
     public Integer getId() {
         return id;

@@ -39,6 +39,12 @@ public class CadastroArbitro extends javax.swing.JInternalFrame {
         varNacionalidade = new javax.swing.JTextField();
         varEstado = new javax.swing.JTextField();
         varIdCampeonato = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setTitle("Inscrição de Arbitro");
 
@@ -67,59 +73,96 @@ public class CadastroArbitro extends javax.swing.JInternalFrame {
 
         lbIidCampeonato.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbIidCampeonato.setForeground(new java.awt.Color(255, 255, 255));
-        lbIidCampeonato.setText("id Campeonato:");
+        lbIidCampeonato.setText("Campeonato:");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/me/icones/arbitro-de-esportes.png"))); // NOI18N
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/me/icones/icone add usuario.png"))); // NOI18N
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/me/icones/icone editar usuario.png"))); // NOI18N
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/me/icones/icone deletar usuario.png"))); // NOI18N
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTitulo)
-                .addGap(120, 120, 120))
+            .addComponent(jSeparator1)
+            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(40, 40, 40)
+                .addComponent(jButton1)
+                .addGap(75, 75, 75)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(55, 55, 55))
+            .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDtNascimento)
-                    .addComponent(lblNome)
-                    .addComponent(lblNacionalidade)
-                    .addComponent(lblEstado)
-                    .addComponent(lbIidCampeonato))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(varNome)
-                    .addComponent(varDtnascimento)
-                    .addComponent(varNacionalidade)
-                    .addComponent(varEstado)
-                    .addComponent(varIdCampeonato, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(205, 205, 205)
+                        .addComponent(jLabel1))
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(143, 143, 143)
+                        .addComponent(lblTitulo))
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                .addComponent(lblDtNascimento)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(varDtnascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbIidCampeonato)
+                                    .addComponent(lblNome)
+                                    .addComponent(lblNacionalidade)
+                                    .addComponent(lblEstado))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(varNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(varNacionalidade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(varEstado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(varIdCampeonato, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(36, 36, 36)
                 .addComponent(lblTitulo)
-                .addGap(38, 38, 38)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblNome)
-                    .addComponent(varNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addComponent(jLabel1)
+                .addGap(30, 30, 30)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDtNascimento)
-                    .addComponent(varDtnascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(varNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNome))
+                .addGap(30, 30, 30)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(varDtnascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDtNascimento))
+                .addGap(26, 26, 26)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNacionalidade)
                     .addComponent(varNacionalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEstado)
                     .addComponent(varEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(26, 26, 26)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbIidCampeonato)
                     .addComponent(varIdCampeonato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(345, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -138,6 +181,12 @@ public class CadastroArbitro extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lbIidCampeonato;
     private javax.swing.JLabel lblDtNascimento;

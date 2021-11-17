@@ -41,6 +41,8 @@ public class Atleta {
         this.cpf = cpf;
     }
 
+   
+    
     public String getCampeonato() {
         return campeonato;
     }

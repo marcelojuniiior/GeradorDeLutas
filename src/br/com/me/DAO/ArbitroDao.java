@@ -85,7 +85,7 @@ public class ArbitroDao {
     }
 
     public ResultSet pesquisarArbitro() {
-        String sql = "SELECT * FROM arbitro";
+        String sql = "SELECT idarbitro as id,nome,dtnascimento as nasc,nacionalidade as país,estado,telefone,cpf FROM arbitro";
         try {
             conexao = FabricaConexao.abrirConexao();
             prepararSql = conexao.prepareStatement(sql);

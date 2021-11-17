@@ -57,8 +57,8 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
         varDtCampeonato = new javax.swing.JFormattedTextField();
         varValorInscricao = new javax.swing.JFormattedTextField();
         btPesquisar = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        Aberto = new javax.swing.JRadioButton();
+        Fechado = new javax.swing.JRadioButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -172,18 +172,18 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
         });
         kGradientPanel1.add(btPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 30, 30));
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Aberto");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(Aberto);
+        Aberto.setText("Aberto");
+        Aberto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                AbertoActionPerformed(evt);
             }
         });
-        kGradientPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, -1));
+        kGradientPanel1.add(Aberto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, -1));
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Fechado");
-        kGradientPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, -1));
+        buttonGroup1.add(Fechado);
+        Fechado.setText("Fechado");
+        kGradientPanel1.add(Fechado, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -216,7 +216,10 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
             String valorinsc = varValorInscricao.getText().trim();
             String valorconvertido = valorinsc.replace(",", ".");
             campeonato.setValorinscricao(Double.parseDouble(valorconvertido));
-
+            campeonato.setCondicao(Aberto.isSelected());
+            
+            
+            
             boolean sCamp = campeonatoDao.criarCampeonato(campeonato);
             if(sCamp == true){
                 limparcampos();
@@ -243,6 +246,9 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
         String valorInscricao = pesquisa.getValorinscricao().toString();
         String valorconvertido = valorInscricao.replace(".", ",");
         varValorInscricao.setText(valorconvertido);
+        
+        
+        
         btAdicionar.setEnabled(false);
         
         
@@ -279,9 +285,9 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btDeletarActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void AbertoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbertoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_AbertoActionPerformed
 
     public void limparcampos() {
         varID.setText("");
@@ -369,6 +375,8 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton Aberto;
+    private javax.swing.JRadioButton Fechado;
     private javax.swing.JLabel LOGO;
     private javax.swing.JButton btAdicionar;
     private javax.swing.JButton btDeletar;
@@ -377,8 +385,6 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel data;
     private javax.swing.JLabel id;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel logradouro;
     private javax.swing.JLabel nome;

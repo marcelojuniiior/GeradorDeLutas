@@ -5,9 +5,18 @@
  */
 package br.com.me.telas;
 
+import br.com.me.DAO.ArbitroDao;
 import br.com.me.DAO.AtletaDao;
 import br.com.me.entidade.Atleta;
+import br.com.me.entidade.Campeonato;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
 import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -20,6 +29,7 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
      */
     public CadastroLutador() {
         initComponents();
+        pesquisandoCampeonato();
     }
 
     /**
@@ -41,7 +51,6 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
         lblNacionalidade = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
         lblCategoria = new javax.swing.JLabel();
-        varPesquisar = new javax.swing.JTextField();
         varNome = new javax.swing.JTextField();
         varEstado = new javax.swing.JTextField();
         varNacionalidade = new javax.swing.JTextField();
@@ -57,13 +66,14 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
         varCPF = new javax.swing.JFormattedTextField();
         varCelular = new javax.swing.JFormattedTextField();
         lblEstado1 = new javax.swing.JLabel();
-        varCampeonato = new javax.swing.JComboBox<>();
+        varCampeonato = new javax.swing.JComboBox();
         btAdicionarUsuario = new javax.swing.JButton();
         btAlterarUsuario = new javax.swing.JButton();
         btExcluirUsuario = new javax.swing.JButton();
         varID = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
+        varPesquisar = new javax.swing.JFormattedTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -121,9 +131,6 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
         lblCategoria.setForeground(new java.awt.Color(255, 255, 255));
         lblCategoria.setText("Categoria:");
         kGradientPanel1.add(lblCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, -1, -1));
-
-        varPesquisar.setToolTipText("DIGITE O CPF DO ATLETA");
-        kGradientPanel1.add(varPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 130, 206, -1));
         kGradientPanel1.add(varNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 223, -1));
         kGradientPanel1.add(varEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, 223, -1));
         kGradientPanel1.add(varNacionalidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 223, -1));
@@ -190,7 +197,7 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
         lblEstado1.setText("Campeonato:");
         kGradientPanel1.add(lblEstado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, -1, -1));
 
-        varCampeonato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        varCampeonato.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         kGradientPanel1.add(varCampeonato, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, 223, -1));
 
         btAdicionarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/me/icones/icone add usuario.png"))); // NOI18N
@@ -221,15 +228,31 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
         kGradientPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 133, -1, -1));
         kGradientPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 506, 10));
 
+        try {
+            varPesquisar.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        kGradientPanel1.add(varPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 170, -1));
+
         getContentPane().add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 610));
 
         setBounds(0, 0, 510, 630);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void pesquisandoCampeonato() {
+        AtletaDao atletaDao = new AtletaDao();
+        List<Campeonato> campeonatopesq = atletaDao.pesquisarCampeonato();
+
+        varCampeonato.removeAll();
+        for (Campeonato campeonato : campeonatopesq) {
+            varCampeonato.addItem(campeonato);
+        }
+    }
     private void btAdicionarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarUsuarioActionPerformed
-       if (!validandoatleta()) {
+        if (!validandoatleta()) {
             Atleta atleta = new Atleta();
-            
+
             atleta.setNome(varNome.getText().trim());
             atleta.setNascimento(varDtNascimento.getText().trim());
             String altura = varAltura.getText().trim();
@@ -245,40 +268,47 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
             atleta.setTelefone(varCelular.getText().trim());
             atleta.setCampeonato(varCampeonato.getSelectedItem().toString());
             AtletaDao atletaDao = new AtletaDao();
-            boolean salvandoatleta = atletaDao.adicionarAtleta(atleta);
-            if(salvandoatleta == true){
-               limparcampos(); 
+            boolean salvandoatleta = false;
+            try {
+                salvandoatleta = atletaDao.adicionarAtleta(atleta);
+            } catch (SQLException ex) {
+                Logger.getLogger(CadastroLutador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (salvandoatleta == true) {
+                limparcampos();
             }
         }
     }//GEN-LAST:event_btAdicionarUsuarioActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      AtletaDao atletaDao = new AtletaDao();
-      
-      String cpf = varPesquisar.getText().trim();
-      Atleta atletapesquisado = atletaDao.pesquisarCPF(cpf);
-      
-      varID.setText(atletapesquisado.getId().toString());
-      varNome.setText(atletapesquisado.getNome());
-      varDtNascimento.setText(atletapesquisado.getNascimento());
-      String altura = atletapesquisado.getAltura().toString();
-      String alturaalterada = altura.replace(".", ",");
-      varAltura.setText(alturaalterada);
-      varCategoria.setSelectedItem(atletapesquisado.getCategoria());
-      varCelular.setText(atletapesquisado.getTelefone());
-      varEstado.setText(atletapesquisado.getEstado());
-      varNacionalidade.setText(atletapesquisado.getNacionalidade());
-      String peso = atletapesquisado.getPeso().toString();
-      String pesoalterado = peso.replace(".", ",");
-      varPeso.setText(pesoalterado);
-      varCPF.setText(atletapesquisado.getCpf());
-      varCampeonato.setSelectedItem(atletapesquisado.getCampeonato());
-      btAdicionarUsuario.setEnabled(false);
-      
+        AtletaDao atletaDao = new AtletaDao();
+
+        String cpf = varPesquisar.getText().trim();
+        Atleta atletapesquisado = atletaDao.pesquisarCPF(cpf);
+        if(atletapesquisado == null){
+            JOptionPane.showMessageDialog(null, "CPF não encontrado");
+        }
+        varID.setText(atletapesquisado.getId().toString());
+        varNome.setText(atletapesquisado.getNome());
+        varDtNascimento.setText(atletapesquisado.getNascimento());
+        String altura = atletapesquisado.getAltura().toString();
+        String alturaalterada = altura.replace(".", ",");
+        varAltura.setText(alturaalterada);
+        varCategoria.setSelectedItem(atletapesquisado.getCategoria());
+        varCelular.setText(atletapesquisado.getTelefone());
+        varEstado.setText(atletapesquisado.getEstado());
+        varNacionalidade.setText(atletapesquisado.getNacionalidade());
+        String peso = atletapesquisado.getPeso().toString();
+        String pesoalterado = peso.replace(".", ",");
+        varPeso.setText(pesoalterado);
+        varCPF.setText(atletapesquisado.getCpf());
+        varCampeonato.setSelectedItem(atletapesquisado.getCampeonato());
+        btAdicionarUsuario.setEnabled(false);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btAlterarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarUsuarioActionPerformed
-       if (!validandoatleta()) {
+        if (!validandoatleta()) {
             Atleta atleta = new Atleta();
             atleta.setId(Integer.parseInt(varID.getText()));
             atleta.setNome(varNome.getText().trim());
@@ -297,14 +327,14 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
             atleta.setCampeonato(varCampeonato.getSelectedItem().toString());
             AtletaDao atletaDao = new AtletaDao();
             boolean salvandoatleta = atletaDao.alterarAtleta(atleta);
-            if(salvandoatleta == true){
-               limparcampos(); 
-               btAdicionarUsuario.setEnabled(true);
+            if (salvandoatleta == true) {
+                limparcampos();
+                btAdicionarUsuario.setEnabled(true);
             }
         }
     }//GEN-LAST:event_btAlterarUsuarioActionPerformed
 
-    public void limparcampos(){
+    public void limparcampos() {
         varAltura.setText("");
         varCategoria.setSelectedItem(" ");
         varDtNascimento.setText("");
@@ -318,6 +348,7 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
         varCelular.setText("");
         varCampeonato.setSelectedItem(" ");
     }
+
     public boolean validandoatleta() {
         if (validarnome()) {
             JOptionPane.showMessageDialog(null, "Digite um nome valido!");
@@ -327,41 +358,42 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Digite uma data de nascimento valida!");
             return true;
         }
-        if(validandocpf()){
+        if (validandocpf()) {
             JOptionPane.showMessageDialog(null, "Digite um CPF valido!");
             return true;
         }
-        if(validandoaltura()){
+        if (validandoaltura()) {
             JOptionPane.showMessageDialog(null, "Digite uma altura valida!");
             return true;
         }
-        if(validandoCampoVazio(varPeso.getText().trim())){
+        if (validandoCampoVazio(varPeso.getText().trim())) {
             JOptionPane.showMessageDialog(null, "Digite um peso valido!");
             return true;
         }
-        if(validandoCategoria()){
+        if (validandoCategoria()) {
             JOptionPane.showMessageDialog(null, "Selecione uma categoria valida!");
             return true;
         }
-        if(valiandoCampoMenorQue3vazio(varNacionalidade.getText().trim())){
+        if (valiandoCampoMenorQue3vazio(varNacionalidade.getText().trim())) {
             JOptionPane.showMessageDialog(null, "Digite um país valido!");
             return true;
         }
-        if(valiandoCampoMenorQue3vazio(varEstado.getText().trim())){
+        if (valiandoCampoMenorQue3vazio(varEstado.getText().trim())) {
             JOptionPane.showMessageDialog(null, "Digite um estado valido!");
             return true;
         }
         return false;
     }
-    public boolean validandoaltura(){
+
+    public boolean validandoaltura() {
         String altura = varAltura.getText().trim();
-        if(altura.equals(",")){
+        if (altura.equals(",")) {
             return true;
         }
         return false;
     }
-    
-    public boolean validandocelular(){
+
+    public boolean validandocelular() {
         String telefone = varCelular.getText().trim();
         int ultimoIndiceTelefone = telefone.length() - 1;
         char ultimoValor = telefone.charAt(ultimoIndiceTelefone);
@@ -370,35 +402,36 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
         }
         return false;
     }
-    
-    public boolean validandocpf(){
+
+    public boolean validandocpf() {
         String cpf = varCPF.getText().trim();
         String primeiroCaracter = cpf.substring(0, 1);
         return primeiroCaracter.equals(".");
     }
-    
-    public boolean validandodata(){
+
+    public boolean validandodata() {
         String data = varDtNascimento.getText().trim();
-        if(data.equals("/  /")){
+        if (data.equals("/  /")) {
             return true;
         }
         return false;
     }
-    public boolean valiandoCampoMenorQue3vazio(String menorQue3){
-       if(menorQue3.length()<3 || menorQue3.equals("")){
-           return true;
-       }
+
+    public boolean valiandoCampoMenorQue3vazio(String menorQue3) {
+        if (menorQue3.length() < 3 || menorQue3.equals("")) {
+            return true;
+        }
         return false;
     }
-    
-    public boolean validandoCategoria(){
+
+    public boolean validandoCategoria() {
         String categoria = varCategoria.getSelectedItem().toString();
-        if(categoria.equals(" ")){
+        if (categoria.equals(" ")) {
             return true;
         }
         return false;
     }
-    
+
     public boolean validandoCampoVazio(String cv) {
         if (cv.equals("")) {
             return true;
@@ -438,7 +471,7 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JFormattedTextField varAltura;
     private javax.swing.JFormattedTextField varCPF;
-    private javax.swing.JComboBox<String> varCampeonato;
+    private javax.swing.JComboBox varCampeonato;
     private javax.swing.JComboBox<String> varCategoria;
     private javax.swing.JFormattedTextField varCelular;
     private javax.swing.JFormattedTextField varDtNascimento;
@@ -447,6 +480,6 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
     private javax.swing.JTextField varNacionalidade;
     private javax.swing.JTextField varNome;
     private javax.swing.JFormattedTextField varPeso;
-    private javax.swing.JTextField varPesquisar;
+    private javax.swing.JFormattedTextField varPesquisar;
     // End of variables declaration//GEN-END:variables
 }

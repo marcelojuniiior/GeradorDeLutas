@@ -6,6 +6,7 @@
 package br.com.me.DAO;
 
 import br.com.me.entidade.Atleta;
+import br.com.me.entidade.Campeonato;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -101,14 +102,32 @@ public class AtletaDao {
                 atleta.setCpf(resultado.getString("Cpf"));
                 atleta.setTelefone(resultado.getString("Telefone"));
                 atleta.setCampeonato(resultado.getString("campeonato"));
+                return atleta;
             }
 
         } catch (Exception e) {
             System.out.println("Erro ao pesquisar Atletas por CPF " + e.getMessage());
         }
-        return atleta;
+        return null;
     }
-
+    public List<Campeonato> pesquisarCampeonato() {
+        String sql = "SELECT nome From campeonato";
+        Campeonato campeonato;
+        List<Campeonato>campeonatos = new ArrayList<>();
+        try {
+            conexao = FabricaConexao.abrirConexao();
+            prepararSql = conexao.prepareStatement(sql);
+            resultado = prepararSql.executeQuery();
+            while (resultado.next()){
+                campeonato = new Campeonato();
+                campeonato.setNome(resultado.getString("nome"));
+                campeonatos.add(campeonato);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao BUSCAR CAMPEONATOS" + e.getMessage());
+        }
+        return campeonatos;
+    }
     public void excluir(int id) {
         String sql = "DELETE FROM atleta WHERE idatleta = ?";
         try {

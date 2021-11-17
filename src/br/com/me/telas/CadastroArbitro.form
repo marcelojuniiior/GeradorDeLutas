@@ -49,63 +49,100 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="lblTitulo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
-              </Group>
+              <Component id="jSeparator1" max="32767" attributes="0"/>
+              <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblDtNascimento" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblNacionalidade" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblEstado" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbIidCampeonato" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="varNome" max="32767" attributes="0"/>
-                      <Component id="varDtnascimento" max="32767" attributes="0"/>
-                      <Component id="varNacionalidade" max="32767" attributes="0"/>
-                      <Component id="varEstado" max="32767" attributes="0"/>
-                      <Component id="varIdCampeonato" min="-2" pref="234" max="-2" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
+                          <Component id="lblTitulo" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="lblDtNascimento" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="varDtnascimento" min="-2" pref="234" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lbIidCampeonato" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblNome" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblNacionalidade" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblEstado" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="varNome" alignment="1" min="-2" pref="234" max="-2" attributes="0"/>
+                                      <Component id="varNacionalidade" alignment="1" min="-2" pref="234" max="-2" attributes="0"/>
+                                      <Component id="varEstado" alignment="1" min="-2" pref="234" max="-2" attributes="0"/>
+                                      <Component id="varIdCampeonato" alignment="1" min="-2" pref="234" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="72" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="lblTitulo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="lblNome" min="-2" max="-2" attributes="0"/>
-                      <Component id="varNome" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jSeparator1" min="-2" pref="12" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblDtNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="varDtnascimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="varNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNome" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="varDtnascimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblDtNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblNacionalidade" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="varNacionalidade" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="varEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbIidCampeonato" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="varIdCampeonato" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="345" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="52" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -174,7 +211,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="id Campeonato:"/>
+            <Property name="text" type="java.lang.String" value="Campeonato:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="varDtnascimento">
@@ -186,6 +223,38 @@
         <Component class="javax.swing.JTextField" name="varEstado">
         </Component>
         <Component class="javax.swing.JTextField" name="varIdCampeonato">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/br/com/me/icones/arbitro-de-esportes.png"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSeparator" name="jSeparator1">
+        </Component>
+        <Component class="javax.swing.JSeparator" name="jSeparator2">
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/br/com/me/icones/icone add usuario.png"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton2">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/br/com/me/icones/icone editar usuario.png"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton3">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/br/com/me/icones/icone deletar usuario.png"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
