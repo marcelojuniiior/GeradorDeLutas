@@ -25,8 +25,8 @@ public class ArbitroDao {
 
     public void AdicionarArbitro(Arbitro arbitro) {
 
-        String sql = "INSERT INTO arbitro(nome, nascimento, nacionalidade, estado)"
-                + " values(?, ?, ?, ?)";
+        String sql = "INSERT INTO arbitro(nome, dtnascimento, nacionalidade, estado, telefone, cpf, campeonato)"
+                + " values(?, ?, ?, ?, ?, ?, ?)";
         try {
             conexao = FabricaConexao.abrirConexao();
             prepararSql = conexao.prepareStatement(sql);
@@ -34,6 +34,9 @@ public class ArbitroDao {
             prepararSql.setString(2, arbitro.getDtnascimento());
             prepararSql.setString(3, arbitro.getNacionalidade());
             prepararSql.setString(4, arbitro.getEstado());
+            prepararSql.setString(5, arbitro.getTelefone());
+            prepararSql.setString(6, arbitro.getCpf());
+            prepararSql.setString(7, arbitro.getCampeonato());
             prepararSql.executeUpdate();
         } catch (Exception e) {
             System.out.println("Erro ao salvar o Arbitro " + e.getMessage());

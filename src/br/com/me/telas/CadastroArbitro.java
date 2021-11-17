@@ -5,6 +5,14 @@
  */
 package br.com.me.telas;
 
+import br.com.me.DAO.ArbitroDao;
+import br.com.me.DAO.AtletaDao;
+import br.com.me.DAO.CampeonatoDao;
+import br.com.me.entidade.Arbitro;
+import br.com.me.entidade.Campeonato;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author marcelo jr
@@ -16,6 +24,7 @@ public class CadastroArbitro extends javax.swing.JInternalFrame {
      */
     public CadastroArbitro() {
         initComponents();
+        pesquisandoCampeonato();
     }
 
     /**
@@ -34,136 +43,117 @@ public class CadastroArbitro extends javax.swing.JInternalFrame {
         lblNacionalidade = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
         lbIidCampeonato = new javax.swing.JLabel();
-        varDtnascimento = new javax.swing.JTextField();
         varNome = new javax.swing.JTextField();
         varNacionalidade = new javax.swing.JTextField();
         varEstado = new javax.swing.JTextField();
-        varIdCampeonato = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        varDtNascimento = new javax.swing.JFormattedTextField();
+        varCampeonato = new javax.swing.JComboBox();
+        lblDtNascimento1 = new javax.swing.JLabel();
+        lblNacionalidade1 = new javax.swing.JLabel();
+        varTelefone = new javax.swing.JFormattedTextField();
+        varCPF = new javax.swing.JFormattedTextField();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
         setTitle("Inscrição de Arbitro");
 
         kGradientPanel1.setkEndColor(new java.awt.Color(255, 255, 255));
         kGradientPanel1.setkStartColor(new java.awt.Color(102, 102, 102));
+        kGradientPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
         lblTitulo.setText("Inscrição de Arbitro");
+        kGradientPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 28, -1, -1));
 
         lblNome.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblNome.setForeground(new java.awt.Color(255, 255, 255));
         lblNome.setText("Nome:");
+        kGradientPanel1.add(lblNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 190, -1, -1));
 
         lblDtNascimento.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblDtNascimento.setForeground(new java.awt.Color(255, 255, 255));
         lblDtNascimento.setText("Data de nascimento:");
+        kGradientPanel1.add(lblDtNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 230, -1, -1));
 
         lblNacionalidade.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblNacionalidade.setForeground(new java.awt.Color(255, 255, 255));
-        lblNacionalidade.setText("Nacionalidade:");
+        lblNacionalidade.setText("País");
+        kGradientPanel1.add(lblNacionalidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, -1));
 
         lblEstado.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblEstado.setForeground(new java.awt.Color(255, 255, 255));
         lblEstado.setText("Estado:");
+        kGradientPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
 
         lbIidCampeonato.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbIidCampeonato.setForeground(new java.awt.Color(255, 255, 255));
         lbIidCampeonato.setText("Campeonato:");
+        kGradientPanel1.add(lbIidCampeonato, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, -1));
+        kGradientPanel1.add(varNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 234, -1));
+        kGradientPanel1.add(varNacionalidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 234, -1));
+        kGradientPanel1.add(varEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 234, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/me/icones/arbitro-de-esportes.png"))); // NOI18N
+        kGradientPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(206, 76, -1, -1));
+        kGradientPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 494, 12));
+        kGradientPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 476, 494, 10));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/me/icones/icone add usuario.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        kGradientPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 513, -1, -1));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/me/icones/icone editar usuario.png"))); // NOI18N
+        kGradientPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 513, -1, -1));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/me/icones/icone deletar usuario.png"))); // NOI18N
+        kGradientPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 513, -1, -1));
 
-        javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
-        kGradientPanel1.setLayout(kGradientPanel1Layout);
-        kGradientPanel1Layout.setHorizontalGroup(
-            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
-            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jButton1)
-                .addGap(75, 75, 75)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(55, 55, 55))
-            .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addComponent(jLabel1))
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(lblTitulo))
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                .addComponent(lblDtNascimento)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(varDtnascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbIidCampeonato)
-                                    .addComponent(lblNome)
-                                    .addComponent(lblNacionalidade)
-                                    .addComponent(lblEstado))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(varNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(varNacionalidade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(varEstado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(varIdCampeonato, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(72, Short.MAX_VALUE))
-        );
-        kGradientPanel1Layout.setVerticalGroup(
-            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(lblTitulo)
-                .addGap(37, 37, 37)
-                .addComponent(jLabel1)
-                .addGap(30, 30, 30)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(varNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNome))
-                .addGap(30, 30, 30)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(varDtnascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDtNascimento))
-                .addGap(26, 26, 26)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNacionalidade)
-                    .addComponent(varNacionalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEstado)
-                    .addComponent(varEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbIidCampeonato)
-                    .addComponent(varIdCampeonato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap(52, Short.MAX_VALUE))
-        );
+        try {
+            varDtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        kGradientPanel1.add(varDtNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 234, -1));
+
+        varCampeonato.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        kGradientPanel1.add(varCampeonato, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 234, -1));
+
+        lblDtNascimento1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblDtNascimento1.setForeground(new java.awt.Color(255, 255, 255));
+        lblDtNascimento1.setText("Telefone:");
+        kGradientPanel1.add(lblDtNascimento1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
+
+        lblNacionalidade1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNacionalidade1.setForeground(new java.awt.Color(255, 255, 255));
+        lblNacionalidade1.setText("CPF:");
+        kGradientPanel1.add(lblNacionalidade1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+
+        try {
+            varTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        kGradientPanel1.add(varTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 234, -1));
+
+        try {
+            varCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        kGradientPanel1.add(varCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 234, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -179,6 +169,92 @@ public class CadastroArbitro extends javax.swing.JInternalFrame {
         setBounds(0, 0, 510, 630);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(!validandoArbitro()){
+            Arbitro arbitro = new Arbitro();
+            arbitro.setNome(varNome.getText().trim());
+            arbitro.setDtnascimento(varDtNascimento.getText().trim());
+            arbitro.setCpf(varCPF.getText().trim());
+            arbitro.setEstado(varEstado.getText().trim());
+            arbitro.setNacionalidade(varNacionalidade.getText().trim());
+            arbitro.setTelefone(varTelefone.getText().trim());
+            arbitro.setCampeonato(varCampeonato.getSelectedItem().toString());
+            
+            ArbitroDao arbitroDao = new ArbitroDao();
+            arbitroDao.AdicionarArbitro(arbitro);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+   
+    public void pesquisandoCampeonato() {
+        CampeonatoDao campeonatoDao = new CampeonatoDao();
+        List<Campeonato> campeonatopesq = campeonatoDao.pesquisarCampeonato();
+
+        varCampeonato.removeAll();
+        for (Campeonato campeonato : campeonatopesq) {
+            varCampeonato.addItem(campeonato);
+        }
+    }
+    
+    public boolean validandoArbitro(){
+      if (validarnome()) {
+            JOptionPane.showMessageDialog(null, "Digite um nome valido!");
+            return true;
+        }
+      if (validandodata()) {
+            JOptionPane.showMessageDialog(null, "Digite uma data de nascimento valida!");
+            return true;
+        }
+      if (validandocpf()) {
+            JOptionPane.showMessageDialog(null, "Digite um CPF valido!");
+            return true;
+        }
+      if(valiandoCampoMenorQue3vazio(varEstado.getText().trim())){
+          JOptionPane.showMessageDialog(null, "Digite um Estado valido!");
+            return true;
+      }
+      if(valiandoCampoMenorQue3vazio(varNacionalidade.getText().trim())){
+          JOptionPane.showMessageDialog(null, "Digite um País valido!");
+            return true;
+      }
+        return false;
+    }
+    public boolean validandocelular() {
+        String telefone = varTelefone.getText().trim();
+        int ultimoIndiceTelefone = telefone.length() - 1;
+        char ultimoValor = telefone.charAt(ultimoIndiceTelefone);
+        if (ultimoValor == '-') {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean validarnome() {
+        String nome = varNome.getText().trim();
+        if (nome.equals("") || nome.length() < 3) {
+            return true;
+        }
+        return false;
+    }
+    public boolean validandocpf() {
+        String cpf = varCPF.getText().trim();
+        String primeiroCaracter = cpf.substring(0, 1);
+        return primeiroCaracter.equals(".");
+    }
+
+    public boolean validandodata() {
+        String data = varDtNascimento.getText().trim();
+        if (data.equals("/  /")) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean valiandoCampoMenorQue3vazio(String menorQue3) {
+        if (menorQue3.length() < 3 || menorQue3.equals("")) {
+            return true;
+        }
+        return false;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -190,14 +266,18 @@ public class CadastroArbitro extends javax.swing.JInternalFrame {
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lbIidCampeonato;
     private javax.swing.JLabel lblDtNascimento;
+    private javax.swing.JLabel lblDtNascimento1;
     private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblNacionalidade;
+    private javax.swing.JLabel lblNacionalidade1;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTextField varDtnascimento;
+    private javax.swing.JFormattedTextField varCPF;
+    private javax.swing.JComboBox varCampeonato;
+    private javax.swing.JFormattedTextField varDtNascimento;
     private javax.swing.JTextField varEstado;
-    private javax.swing.JTextField varIdCampeonato;
     private javax.swing.JTextField varNacionalidade;
     private javax.swing.JTextField varNome;
+    private javax.swing.JFormattedTextField varTelefone;
     // End of variables declaration//GEN-END:variables
 }

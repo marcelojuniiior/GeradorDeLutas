@@ -18,7 +18,18 @@ public class Arbitro {
     private String estado;
     private String cpf;
     private String telefone;
+    private String campeonato;
 
+    public String getCampeonato() {
+        return campeonato;
+    }
+
+    public void setCampeonato(String campeonato) {
+        this.campeonato = campeonato;
+    }
+
+    
+    
     public String getCpf() {
         return cpf;
     }

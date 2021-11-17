@@ -7,6 +7,7 @@ package br.com.me.telas;
 
 import br.com.me.DAO.ArbitroDao;
 import br.com.me.DAO.AtletaDao;
+import br.com.me.DAO.CampeonatoDao;
 import br.com.me.entidade.Atleta;
 import br.com.me.entidade.Campeonato;
 import java.sql.ResultSet;
@@ -241,8 +242,8 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void pesquisandoCampeonato() {
-        AtletaDao atletaDao = new AtletaDao();
-        List<Campeonato> campeonatopesq = atletaDao.pesquisarCampeonato();
+        CampeonatoDao campeonatoDao = new CampeonatoDao();
+        List<Campeonato> campeonatopesq = campeonatoDao.pesquisarCampeonato();
 
         varCampeonato.removeAll();
         for (Campeonato campeonato : campeonatopesq) {

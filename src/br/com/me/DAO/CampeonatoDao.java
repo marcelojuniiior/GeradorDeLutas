@@ -9,6 +9,8 @@ import br.com.me.entidade.Campeonato;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,7 +34,7 @@ public class CampeonatoDao {
             prepararsql.setString(3, campeonato.getNumero());
             prepararsql.setString(4, campeonato.getDtcampeonato());
             prepararsql.setDouble(5, campeonato.getValorinscricao());
-            prepararsql.setBoolean(6, campeonato.isCondicao());
+            prepararsql.setString(6, campeonato.getCondicao());
             prepararsql.executeUpdate();
             JOptionPane.showMessageDialog(null, "Campeonato criado com Sucesso");
             return true;
@@ -43,7 +45,7 @@ public class CampeonatoDao {
     }
 
     public boolean alterarCampeonato(Campeonato campeonato) {
-        String sql = "UPDATE campeonato set nome =?, logradouro =?, numero =?, dtcampeonato =?, valorinscricao =? WHERE idcampeonato =?";
+        String sql = "UPDATE campeonato set nome =?, logradouro =?, numero =?, dtcampeonato =?, valorinscricao =?, condicao=? WHERE idcampeonato =?";
 
         try {
             conexao = FabricaConexao.abrirConexao();
@@ -53,7 +55,8 @@ public class CampeonatoDao {
             prepararsql.setString(3, campeonato.getNumero());
             prepararsql.setString(4, campeonato.getDtcampeonato());
             prepararsql.setDouble(5, campeonato.getValorinscricao());
-            prepararsql.setInt(6, campeonato.getId());
+            prepararsql.setString(6, campeonato.getCondicao());
+            prepararsql.setInt(7, campeonato.getId());
             prepararsql.executeUpdate();
             JOptionPane.showMessageDialog(null, "Camepeonato Alterado com Sucesso");
             return true;
@@ -77,6 +80,7 @@ public class CampeonatoDao {
                 campeonato.setLogradouro(resultado.getString("logradouro"));
                 campeonato.setNumero(resultado.getString("numero"));
                 campeonato.setValorinscricao(Double.parseDouble(resultado.getString("valorinscricao")));
+                campeonato.setCondicao(resultado.getString("condicao"));
                 return campeonato;
             }
         } catch (Exception e) {
@@ -98,5 +102,23 @@ public class CampeonatoDao {
             System.out.println("ERRO AO DELETAR" + e);
         }
         return false;
+    }
+    public List<Campeonato> pesquisarCampeonato() {
+        String sql = "SELECT nome From campeonato";
+        Campeonato campeonato;
+        List<Campeonato>campeonatos = new ArrayList<>();
+        try {
+            conexao = FabricaConexao.abrirConexao();
+            prepararsql = conexao.prepareStatement(sql);
+            resultado = prepararsql.executeQuery();
+            while (resultado.next()){
+                campeonato = new Campeonato();
+                campeonato.setNome(resultado.getString("nome"));
+                campeonatos.add(campeonato);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao BUSCAR CAMPEONATOS" + e.getMessage());
+        }
+        return campeonatos;
     }
 }

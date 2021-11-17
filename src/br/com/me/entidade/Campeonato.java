@@ -18,7 +18,7 @@ public class Campeonato {
     private String numero;
     private String dtcampeonato;
     private Double valorinscricao;
-    private boolean condicao;
+    private String condicao;
 
     public Campeonato() {
     }
@@ -31,17 +31,14 @@ public class Campeonato {
         this.valorinscricao = valorinscricao;
     }
 
-    public boolean isCondicao() {
+    public String getCondicao() {
         return condicao;
     }
 
-    public void setCondicao(boolean condicao) {
+    public void setCondicao(String condicao) {
         this.condicao = condicao;
     }
-
-    
-     
-    
+         
     @Override
     public String toString() {
         return this.getNome();

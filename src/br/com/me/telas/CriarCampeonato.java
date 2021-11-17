@@ -21,7 +21,9 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
      */
     public CriarCampeonato() {
         initComponents();
-
+        Aberto.setActionCommand("aberto");
+        Fechado.setActionCommand("fechado");
+                      
     }
     CampeonatoDao campeonatoDao = new CampeonatoDao();
     Campeonato campeonato = new Campeonato();
@@ -216,7 +218,7 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
             String valorinsc = varValorInscricao.getText().trim();
             String valorconvertido = valorinsc.replace(",", ".");
             campeonato.setValorinscricao(Double.parseDouble(valorconvertido));
-            campeonato.setCondicao(Aberto.isSelected());
+            campeonato.setCondicao(buttonGroup1.getSelection().getActionCommand());
             
             
             
@@ -247,7 +249,11 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
         String valorconvertido = valorInscricao.replace(".", ",");
         varValorInscricao.setText(valorconvertido);
         
-        
+        if(pesquisa.getCondicao().equals("aberto")){
+            Aberto.setSelected(true);
+        }else if(pesquisa.getCondicao().equals("fechado")){
+           Fechado.setSelected(true);
+    }
         
         btAdicionar.setEnabled(false);
         
@@ -263,7 +269,7 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
             String valorinsc = varValorInscricao.getText().trim();
             String valorconvertido = valorinsc.replace(",", ".");
             campeonato.setValorinscricao(Double.parseDouble(valorconvertido));
-
+            campeonato.setCondicao(buttonGroup1.getSelection().getActionCommand());
             boolean alterar = campeonatoDao.alterarCampeonato(campeonato);
             if (alterar) {
                 btAdicionar.setEnabled(true);
@@ -296,6 +302,7 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
         varNome.setText("");
         varNumero.setText("");
         varValorInscricao.setText("");
+        buttonGroup1.clearSelection();
     }
 
     public boolean validandoCampeonato() {
