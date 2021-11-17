@@ -23,7 +23,7 @@ public class LutaDao {
     ResultSet resultado;
 
     public ResultSet atletasCampeonato(int id){
-       String sql = "SELECT idatleta as Id,nome,nacionalidade as País,altura,peso,categoria FROM atleta where campeonato =?";
+       String sql = "SELECT idatleta as Id,nome,nacionalidade as País,altura,peso as PesoKG,categoria FROM atleta where campeonato =?";
         try {
             conexao = FabricaConexao.abrirConexao();
             prepararsql = conexao.prepareStatement(sql);

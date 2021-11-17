@@ -87,11 +87,12 @@ public class ArbitroDao {
         return arbitros;
     }
 
-    public ResultSet pesquisarArbitro() {
-        String sql = "SELECT idarbitro as id,nome,dtnascimento as nasc,nacionalidade as país,estado,telefone,cpf FROM arbitro";
+    public ResultSet pesquisarArbitro(int id) {
+        String sql = "SELECT idarbitro as Id,Nome,nacionalidade as país,Estado,Telefone,Cpf FROM arbitro where campeonato =?";
         try {
             conexao = FabricaConexao.abrirConexao();
             prepararSql = conexao.prepareStatement(sql);
+            prepararSql.setInt(1, id);
             resultado = prepararSql.executeQuery();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao BUSCAR CLIENTE" + e.getMessage());

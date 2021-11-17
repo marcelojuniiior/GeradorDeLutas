@@ -8,6 +8,7 @@ package br.com.me.telas;
 import br.com.me.DAO.ArbitroDao;
 import br.com.me.DAO.AtletaDao;
 import br.com.me.DAO.LutaDao;
+import br.com.me.entidade.Arbitro;
 import br.com.me.entidade.Atleta;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
@@ -184,19 +186,22 @@ public class Lutas extends javax.swing.JInternalFrame {
 
         tblAtletas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "ID", "Nome", "País", "Altura", "Peso", "Categoria"
+                "ID", "Nome", "País", "Altura", "PesoKG", "Categoria"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, true, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -210,11 +215,16 @@ public class Lutas extends javax.swing.JInternalFrame {
             tblAtletas.getColumnModel().getColumn(1).setPreferredWidth(150);
             tblAtletas.getColumnModel().getColumn(2).setPreferredWidth(35);
             tblAtletas.getColumnModel().getColumn(3).setPreferredWidth(35);
-            tblAtletas.getColumnModel().getColumn(4).setPreferredWidth(25);
+            tblAtletas.getColumnModel().getColumn(4).setPreferredWidth(35);
             tblAtletas.getColumnModel().getColumn(5).setResizable(false);
         }
 
         btSortear.setText("Sortear");
+        btSortear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSortearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout abaCampAtletasLayout = new javax.swing.GroupLayout(abaCampAtletas);
         abaCampAtletas.setLayout(abaCampAtletasLayout);
@@ -239,13 +249,10 @@ public class Lutas extends javax.swing.JInternalFrame {
 
         tblArbitros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "ID", "Nome", "Nac.", "Estado"
+                "ID", "Nome", "País", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -260,9 +267,9 @@ public class Lutas extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(tblArbitros);
         if (tblArbitros.getColumnModel().getColumnCount() > 0) {
             tblArbitros.getColumnModel().getColumn(0).setResizable(false);
-            tblArbitros.getColumnModel().getColumn(0).setPreferredWidth(5);
+            tblArbitros.getColumnModel().getColumn(0).setPreferredWidth(15);
             tblArbitros.getColumnModel().getColumn(1).setResizable(false);
-            tblArbitros.getColumnModel().getColumn(1).setPreferredWidth(250);
+            tblArbitros.getColumnModel().getColumn(1).setPreferredWidth(100);
             tblArbitros.getColumnModel().getColumn(2).setResizable(false);
             tblArbitros.getColumnModel().getColumn(2).setPreferredWidth(50);
             tblArbitros.getColumnModel().getColumn(3).setResizable(false);
@@ -292,358 +299,169 @@ public class Lutas extends javax.swing.JInternalFrame {
 
         tblCamp.addTab("Arbitros", abaCampArbitros);
 
+        abaCampLutas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         luta1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         luta1.setText("Luta 1:");
+        abaCampLutas.add(luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         luta2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         luta2.setText("Luta 2:");
+        abaCampLutas.add(luta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 61, -1, -1));
 
         luta3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         luta3.setText("Luta 3:");
+        abaCampLutas.add(luta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 92, -1, -1));
 
         luta4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         luta4.setText("Luta 4:");
+        abaCampLutas.add(luta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 123, -1, -1));
 
         luta5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         luta5.setText("Luta 5:");
+        abaCampLutas.add(luta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 154, -1, -1));
 
         luta6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         luta6.setText("Luta 6:");
+        abaCampLutas.add(luta6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 185, -1, -1));
 
         luta7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         luta7.setText("Luta 7:");
+        abaCampLutas.add(luta7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 216, -1, -1));
 
         luta8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         luta8.setText("Luta 8:");
+        abaCampLutas.add(luta8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 247, -1, -1));
+        abaCampLutas.add(var1Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 30, 149, -1));
+        abaCampLutas.add(var2Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 30, 149, -1));
 
         var1Luta2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 var1Luta2ActionPerformed(evt);
             }
         });
+        abaCampLutas.add(var1Luta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 61, 149, -1));
+        abaCampLutas.add(var2Luta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 61, 149, -1));
+        abaCampLutas.add(var1Luta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 92, 149, -1));
+        abaCampLutas.add(var2Luta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 92, 149, -1));
+        abaCampLutas.add(var1Luta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 123, 149, -1));
+        abaCampLutas.add(var2Luta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 123, 149, -1));
+        abaCampLutas.add(var1Luta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 154, 149, -1));
+        abaCampLutas.add(var2Luta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 154, 149, -1));
+        abaCampLutas.add(var1Luta6, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 185, 149, -1));
+        abaCampLutas.add(var2Luta6, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 185, 149, -1));
+        abaCampLutas.add(var1Luta7, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 216, 149, -1));
 
         var2Luta7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 var2Luta7ActionPerformed(evt);
             }
         });
+        abaCampLutas.add(var2Luta7, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 216, 149, -1));
+        abaCampLutas.add(var1Luta8, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 247, 149, -1));
+        abaCampLutas.add(var2Luta8, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 247, 149, -1));
 
         vesus1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         vesus1.setText("X");
+        abaCampLutas.add(vesus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 30, -1, -1));
 
         vesus2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         vesus2.setText("X");
+        abaCampLutas.add(vesus2, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 61, -1, -1));
 
         vesus3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         vesus3.setText("X");
+        abaCampLutas.add(vesus3, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 92, -1, -1));
 
         vesus4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         vesus4.setText("X");
+        abaCampLutas.add(vesus4, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 123, -1, -1));
 
         vesus5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         vesus5.setText("X");
+        abaCampLutas.add(vesus5, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 154, -1, -1));
 
         vesus6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         vesus6.setText("X");
+        abaCampLutas.add(vesus6, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 185, -1, -1));
 
         vesus7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         vesus7.setText("X");
+        abaCampLutas.add(vesus7, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 216, -1, -1));
 
         vesus8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         vesus8.setText("X");
+        abaCampLutas.add(vesus8, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 247, -1, -1));
 
         Arbitro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Arbitro.setText("Arbitro");
+        abaCampLutas.add(Arbitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
+        abaCampLutas.add(varDtLuta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 30, 90, -1));
+        abaCampLutas.add(varDtLuta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 61, 90, -1));
+        abaCampLutas.add(varDtLuta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 92, 90, -1));
+        abaCampLutas.add(varDtLuta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 123, 90, -1));
+        abaCampLutas.add(varDtLuta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 154, 90, -1));
+        abaCampLutas.add(varDtLuta6, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 185, 90, -1));
+        abaCampLutas.add(varDtLuta7, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 216, 90, -1));
+        abaCampLutas.add(varDtLuta8, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 247, 90, -1));
 
         btSalvarLutas.setText("Vencedores");
-
-        javax.swing.GroupLayout abaCampLutasLayout = new javax.swing.GroupLayout(abaCampLutas);
-        abaCampLutas.setLayout(abaCampLutasLayout);
-        abaCampLutasLayout.setHorizontalGroup(
-            abaCampLutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(abaCampLutasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(abaCampLutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(abaCampLutasLayout.createSequentialGroup()
-                        .addGroup(abaCampLutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                .addComponent(luta8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(var1Luta8))
-                            .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                .addComponent(luta7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(var1Luta7))
-                            .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                .addComponent(luta6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(var1Luta6))
-                            .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                .addComponent(luta5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(var1Luta5))
-                            .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                .addComponent(luta4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(var1Luta4))
-                            .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                .addComponent(luta3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(var1Luta3))
-                            .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                .addComponent(luta2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(var1Luta2))
-                            .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                .addComponent(luta1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(var1Luta1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(abaCampLutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                .addGroup(abaCampLutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(vesus2)
-                                    .addComponent(vesus1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(abaCampLutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                        .addComponent(var2Luta1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(varDtLuta1, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
-                                    .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                        .addComponent(var2Luta2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(varDtLuta2))))
-                            .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                .addGroup(abaCampLutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                        .addComponent(vesus4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(var2Luta4))
-                                    .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                        .addComponent(vesus5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(var2Luta5))
-                                    .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                        .addComponent(vesus7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(var2Luta7))
-                                    .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                        .addComponent(vesus8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(var2Luta8))
-                                    .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                        .addComponent(vesus3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(var2Luta3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(abaCampLutasLayout.createSequentialGroup()
-                                        .addComponent(vesus6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(var2Luta6)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(abaCampLutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(varDtLuta3)
-                                    .addComponent(varDtLuta4)
-                                    .addComponent(varDtLuta5)
-                                    .addComponent(varDtLuta6)
-                                    .addComponent(varDtLuta7)
-                                    .addComponent(varDtLuta8))))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, abaCampLutasLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Arbitro)
-                        .addGap(39, 39, 39))))
-            .addGroup(abaCampLutasLayout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addComponent(btSalvarLutas)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        abaCampLutasLayout.setVerticalGroup(
-            abaCampLutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(abaCampLutasLayout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(Arbitro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(abaCampLutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(luta1)
-                    .addComponent(var1Luta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vesus1)
-                    .addComponent(var2Luta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(varDtLuta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(abaCampLutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(luta2)
-                    .addComponent(var1Luta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vesus2)
-                    .addComponent(var2Luta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(varDtLuta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(abaCampLutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(luta3)
-                    .addComponent(var1Luta3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vesus3)
-                    .addComponent(var2Luta3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(varDtLuta3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(abaCampLutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(luta4)
-                    .addComponent(var1Luta4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vesus4)
-                    .addComponent(var2Luta4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(varDtLuta4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(abaCampLutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(luta5)
-                    .addComponent(var1Luta5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vesus5)
-                    .addComponent(var2Luta5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(varDtLuta5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(abaCampLutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(luta6)
-                    .addComponent(var1Luta6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vesus6)
-                    .addComponent(var2Luta6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(varDtLuta6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(abaCampLutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(luta7)
-                    .addComponent(var1Luta7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vesus7)
-                    .addComponent(var2Luta7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(varDtLuta7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(abaCampLutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(luta8)
-                    .addComponent(var1Luta8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vesus8)
-                    .addComponent(var2Luta8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(varDtLuta8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(btSalvarLutas)
-                .addContainerGap(126, Short.MAX_VALUE))
-        );
+        abaCampLutas.add(btSalvarLutas, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, -1));
 
         tblCamp.addTab("Lutas", abaCampLutas);
 
+        abaCampQuartas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         quartas1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         quartas1.setText("Quartas 1:");
+        abaCampQuartas.add(quartas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 82, -1, -1));
+        abaCampQuartas.add(varQuartas1Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 82, 149, -1));
+        abaCampQuartas.add(varQuartas1Luta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 82, 149, -1));
+        abaCampQuartas.add(varQuartas2Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 137, 149, -1));
+        abaCampQuartas.add(varQuartas2Luta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 137, 149, -1));
+        abaCampQuartas.add(varQuartas3Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 243, 149, -1));
+        abaCampQuartas.add(varQuartas3Luta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 243, 149, -1));
+        abaCampQuartas.add(varQuartas4Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 292, 149, -1));
+        abaCampQuartas.add(varQuartas4Luta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 292, 149, -1));
 
         versus1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         versus1.setText("X");
+        abaCampQuartas.add(versus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 82, -1, -1));
 
         versus2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         versus2.setText("X");
+        abaCampQuartas.add(versus2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 137, -1, -1));
 
         versus3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         versus3.setText("X");
+        abaCampQuartas.add(versus3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 243, -1, -1));
 
         versus4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         versus4.setText("X");
+        abaCampQuartas.add(versus4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 292, -1, -1));
 
         versus5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         versus5.setText("Quartas 2:");
+        abaCampQuartas.add(versus5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 137, -1, -1));
 
         versus6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         versus6.setText("Quartas 3:");
+        abaCampQuartas.add(versus6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 243, -1, -1));
 
         versus7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         versus7.setText("Quartas 4:");
+        abaCampQuartas.add(versus7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 292, -1, -1));
 
         varArbitroQuartas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         varArbitroQuartas.setText("Arbitro");
+        abaCampQuartas.add(varArbitroQuartas, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, -1, -1));
+        abaCampQuartas.add(varDtQuartas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 82, 90, -1));
+        abaCampQuartas.add(varDtQuartas2, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 137, 90, -1));
+        abaCampQuartas.add(varDtQuartas3, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 243, 90, -1));
+        abaCampQuartas.add(varDtQuartas4, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 292, 90, -1));
 
         btQuartasSalvar.setText("Vencedores");
-
-        javax.swing.GroupLayout abaCampQuartasLayout = new javax.swing.GroupLayout(abaCampQuartas);
-        abaCampQuartas.setLayout(abaCampQuartasLayout);
-        abaCampQuartasLayout.setHorizontalGroup(
-            abaCampQuartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(abaCampQuartasLayout.createSequentialGroup()
-                .addGroup(abaCampQuartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(quartas1)
-                    .addComponent(versus5)
-                    .addComponent(versus6)
-                    .addComponent(versus7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(abaCampQuartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(abaCampQuartasLayout.createSequentialGroup()
-                        .addComponent(varQuartas4Luta1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(versus4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(varQuartas4Luta4))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, abaCampQuartasLayout.createSequentialGroup()
-                        .addComponent(varQuartas3Luta1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(versus3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(varQuartas3Luta3))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, abaCampQuartasLayout.createSequentialGroup()
-                        .addComponent(varQuartas2Luta1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(versus2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(varQuartas2Luta2))
-                    .addGroup(abaCampQuartasLayout.createSequentialGroup()
-                        .addComponent(varQuartas1Luta1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(versus1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(varQuartas1Luta2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(abaCampQuartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(varDtQuartas1, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                    .addComponent(varDtQuartas2)
-                    .addComponent(varDtQuartas3)
-                    .addComponent(varDtQuartas4))
-                .addContainerGap())
-            .addGroup(abaCampQuartasLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(varArbitroQuartas)
-                .addGap(27, 27, 27))
-            .addGroup(abaCampQuartasLayout.createSequentialGroup()
-                .addGap(190, 190, 190)
-                .addComponent(btQuartasSalvar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        abaCampQuartasLayout.setVerticalGroup(
-            abaCampQuartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(abaCampQuartasLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(varArbitroQuartas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(abaCampQuartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(quartas1)
-                    .addComponent(varQuartas1Luta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(versus1)
-                    .addComponent(varQuartas1Luta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(varDtQuartas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(abaCampQuartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(varQuartas2Luta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(versus2)
-                    .addComponent(versus5)
-                    .addComponent(varQuartas2Luta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(varDtQuartas2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                .addGroup(abaCampQuartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(varQuartas3Luta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(versus3)
-                    .addComponent(versus6)
-                    .addComponent(varQuartas3Luta3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(varDtQuartas3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(abaCampQuartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(varQuartas4Luta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(versus4)
-                    .addComponent(versus7)
-                    .addComponent(varQuartas4Luta4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(varDtQuartas4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(btQuartasSalvar)
-                .addContainerGap(81, Short.MAX_VALUE))
-        );
+        abaCampQuartas.add(btQuartasSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 342, -1, -1));
 
         tblCamp.addTab("Quartas de final", abaCampQuartas);
 
@@ -861,10 +679,58 @@ public class Lutas extends javax.swing.JInternalFrame {
         pesquisandoArbitroCampeonato();
         pesquisandoAtletaCampeonato();
     }//GEN-LAST:event_btPesquisaActionPerformed
+
+    private void btSortearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSortearActionPerformed
+        int id = Integer.parseInt(varIDpesquisa.getText().trim());
+
+        LutaDao lutadao = new LutaDao();
+        ResultSet atletasPesquisados = lutadao.atletasCampeonato(id);
+        List<Atleta> atletas = new ArrayList<Atleta>();
+        try {
+            while (atletasPesquisados.next()) {
+                Atleta atleta = new Atleta();
+
+                atleta.setId(atletasPesquisados.getInt("id"));
+                atleta.setNome(atletasPesquisados.getString("nome"));
+                atleta.setNacionalidade(atletasPesquisados.getString("País"));
+                atleta.setAltura(Double.parseDouble(atletasPesquisados.getString("altura")));
+                atleta.setPeso(Double.parseDouble(atletasPesquisados.getString("pesoKG")));
+                atleta.setCategoria(atletasPesquisados.getString("categoria"));
+                atletas.add(atleta);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "erro ao pesquisar atletacampeonato" + ex);
+        }
+        
+    }//GEN-LAST:event_btSortearActionPerformed
     public void pesquisandoArbitroCampeonato() {
+        int id = Integer.parseInt(varIDpesquisa.getText().trim());
+
         ArbitroDao arbitroDao = new ArbitroDao();
-        ResultSet resultadopesquisa = arbitroDao.pesquisarArbitro();
-        tblArbitros.setModel(DbUtils.resultSetToTableModel(resultadopesquisa));
+        ResultSet resultadopesquisa = arbitroDao.pesquisarArbitro(id);
+
+        List<Arbitro> arbitros = new ArrayList<Arbitro>();
+        DefaultTableModel modelo = (DefaultTableModel) tblArbitros.getModel();
+
+        try {
+            while (resultadopesquisa.next()) {
+                Arbitro arbitro = new Arbitro();
+                arbitro.setId(resultadopesquisa.getInt("Id"));
+                arbitro.setNome(resultadopesquisa.getString("Nome"));
+                arbitro.setNacionalidade(resultadopesquisa.getString("País"));
+                arbitro.setEstado(resultadopesquisa.getString("Estado"));
+                arbitro.setTelefone(resultadopesquisa.getString("Telefone"));
+                arbitro.setCpf(resultadopesquisa.getString("Cpf"));
+                arbitros.add(arbitro);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao pesquisar ArbitroCampeonato");
+        }
+
+        for (Arbitro arbitro : arbitros) {
+            modelo.addRow(new Object[]{
+                arbitro.getId(), arbitro.getNome(), arbitro.getNacionalidade(), arbitro.getEstado()});
+        }
     }
 
     public void pesquisandoAtletaCampeonato() {
@@ -873,24 +739,27 @@ public class Lutas extends javax.swing.JInternalFrame {
         LutaDao lutadao = new LutaDao();
         ResultSet atletasPesquisados = lutadao.atletasCampeonato(id);
 //        tblAtletas.setModel(DbUtils.resultSetToTableModel(atletasPesquisados));
-        List<Atleta> atletas = new ArrayList<>();
+        List<Atleta> atletas = new ArrayList<Atleta>();
         DefaultTableModel modelo = (DefaultTableModel) tblAtletas.getModel();
         try {
             while (atletasPesquisados.next()) {
                 Atleta atleta = new Atleta();
 
-                atleta.setId(atletasPesquisados.getInt("idatleta"));
+                atleta.setId(atletasPesquisados.getInt("id"));
                 atleta.setNome(atletasPesquisados.getString("nome"));
-                atleta.setNacionalidade(atletasPesquisados.getString("nacionalidade"));
-                atleta.setPeso(Double.parseDouble(atletasPesquisados.getString("peso")));
+                atleta.setNacionalidade(atletasPesquisados.getString("País"));
                 atleta.setAltura(Double.parseDouble(atletasPesquisados.getString("altura")));
+                atleta.setPeso(Double.parseDouble(atletasPesquisados.getString("pesoKG")));
                 atleta.setCategoria(atletasPesquisados.getString("categoria"));
-                
+                atletas.add(atleta);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Lutas.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "erro ao pesquisar atletacampeonato" + ex);
         }
-
+        for (Atleta atleta : atletas) {
+            modelo.addRow(new Object[]{atleta.getId(), atleta.getNome(), atleta.getNacionalidade(),
+                +atleta.getAltura(), atleta.getPeso(), atleta.getCategoria()});
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
