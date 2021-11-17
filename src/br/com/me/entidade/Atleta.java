@@ -21,7 +21,7 @@ public class Atleta {
     private String categoria;
     private String telefone;
     private String cpf;
-    private String campeonato;
+    private int campeonato;
     
     
     public Atleta(){
@@ -41,15 +41,14 @@ public class Atleta {
         this.cpf = cpf;
     }
 
-   
-    
-    public String getCampeonato() {
+    public int getCampeonato() {
         return campeonato;
     }
 
-    public void setCampeonato(String campeonato) {
+    public void setCampeonato(int campeonato) {
         this.campeonato = campeonato;
     }
+    
     
     public Integer getId() {
         return id;

@@ -103,22 +103,18 @@ public class CampeonatoDao {
         }
         return false;
     }
-    public List<Campeonato> pesquisarCampeonato() {
-        String sql = "SELECT nome From campeonato";
+    public ResultSet pesquisarCampeonato() {
+        String sql = "SELECT * From campeonato";
         Campeonato campeonato;
         List<Campeonato>campeonatos = new ArrayList<>();
         try {
             conexao = FabricaConexao.abrirConexao();
             prepararsql = conexao.prepareStatement(sql);
-            resultado = prepararsql.executeQuery();
-            while (resultado.next()){
-                campeonato = new Campeonato();
-                campeonato.setNome(resultado.getString("nome"));
-                campeonatos.add(campeonato);
-            }
+            return resultado = prepararsql.executeQuery();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao BUSCAR CAMPEONATOS" + e.getMessage());
         }
-        return campeonatos;
+        return null;
     }
 }

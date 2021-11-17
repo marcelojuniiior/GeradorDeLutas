@@ -24,7 +24,7 @@ public class CadastroArbitro extends javax.swing.JInternalFrame {
      */
     public CadastroArbitro() {
         initComponents();
-        pesquisandoCampeonato();
+//        pesquisandoCampeonato();
     }
 
     /**
@@ -185,15 +185,15 @@ public class CadastroArbitro extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
    
-    public void pesquisandoCampeonato() {
-        CampeonatoDao campeonatoDao = new CampeonatoDao();
-        List<Campeonato> campeonatopesq = campeonatoDao.pesquisarCampeonato();
-
-        varCampeonato.removeAll();
-        for (Campeonato campeonato : campeonatopesq) {
-            varCampeonato.addItem(campeonato);
-        }
-    }
+//    public void pesquisandoCampeonato() {
+//        CampeonatoDao campeonatoDao = new CampeonatoDao();
+////        List<Campeonato> campeonatopesq = campeonatoDao.pesquisarCampeonato();
+//
+//        varCampeonato.removeAll();
+//        for (Campeonato campeonato : campeonatopesq) {
+//            varCampeonato.addItem(campeonato);
+//        }
+//    }
     
     public boolean validandoArbitro(){
       if (validarnome()) {

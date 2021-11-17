@@ -13,6 +13,7 @@ import br.com.me.entidade.Campeonato;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
@@ -240,15 +241,23 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
 
         setBounds(0, 0, 510, 630);
     }// </editor-fold>//GEN-END:initComponents
+    Vector<Integer> idcampeonato = new Vector<Integer>();
 
     public void pesquisandoCampeonato() {
         CampeonatoDao campeonatoDao = new CampeonatoDao();
-        List<Campeonato> campeonatopesq = campeonatoDao.pesquisarCampeonato();
+        Campeonato campeonato = new Campeonato();
 
-        varCampeonato.removeAll();
-        for (Campeonato campeonato : campeonatopesq) {
-            varCampeonato.addItem(campeonato);
+        ResultSet campeonatopesq = campeonatoDao.pesquisarCampeonato();
+        try {
+            while (campeonatopesq.next()) {
+                campeonato = new Campeonato();
+                idcampeonato.addElement(campeonatopesq.getInt("idcampeonato"));
+                varCampeonato.addItem(campeonatopesq.getString("nome"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "erro ao pesquisar Campeonato" + ex);
         }
+
     }
     private void btAdicionarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarUsuarioActionPerformed
         if (!validandoatleta()) {
@@ -267,7 +276,7 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
             atleta.setEstado(varEstado.getText().trim());
             atleta.setCpf(varCPF.getText().trim());
             atleta.setTelefone(varCelular.getText().trim());
-            atleta.setCampeonato(varCampeonato.getSelectedItem().toString());
+            atleta.setCampeonato(idcampeonato.get(varCampeonato.getSelectedIndex()));
             AtletaDao atletaDao = new AtletaDao();
             boolean salvandoatleta = false;
             try {
@@ -286,7 +295,7 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
 
         String cpf = varPesquisar.getText().trim();
         Atleta atletapesquisado = atletaDao.pesquisarCPF(cpf);
-        if(atletapesquisado == null){
+        if (atletapesquisado == null) {
             JOptionPane.showMessageDialog(null, "CPF não encontrado");
         }
         varID.setText(atletapesquisado.getId().toString());
@@ -325,7 +334,6 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
             atleta.setEstado(varEstado.getText().trim());
             atleta.setCpf(varCPF.getText().trim());
             atleta.setTelefone(varCelular.getText().trim());
-            atleta.setCampeonato(varCampeonato.getSelectedItem().toString());
             AtletaDao atletaDao = new AtletaDao();
             boolean salvandoatleta = atletaDao.alterarAtleta(atleta);
             if (salvandoatleta == true) {

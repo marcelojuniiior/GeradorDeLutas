@@ -42,7 +42,7 @@ public class AtletaDao {
             prepararSql.setString(7, atleta.getCategoria());
             prepararSql.setString(8, atleta.getCpf());
             prepararSql.setString(9, atleta.getTelefone());
-            prepararSql.setString(10, atleta.getCampeonato());
+            prepararSql.setInt(10, atleta.getCampeonato());
             prepararSql.executeUpdate();
             JOptionPane.showMessageDialog(null, "Atleta adicionado com sucesso");
             return true;
@@ -70,7 +70,7 @@ public class AtletaDao {
             prepararSql.setString(7, atleta.getCategoria());
             prepararSql.setString(8, atleta.getCpf());
             prepararSql.setString(9, atleta.getTelefone());
-            prepararSql.setString(10, atleta.getCampeonato());
+            prepararSql.setInt(10, atleta.getCampeonato());
             prepararSql.setInt(11, atleta.getId());
             prepararSql.executeUpdate();
             JOptionPane.showMessageDialog(null, "atleta alterado com sucesso");
@@ -101,7 +101,7 @@ public class AtletaDao {
                 atleta.setCategoria(resultado.getString("Categoria"));
                 atleta.setCpf(resultado.getString("Cpf"));
                 atleta.setTelefone(resultado.getString("Telefone"));
-                atleta.setCampeonato(resultado.getString("campeonato"));
+                atleta.setCampeonato(resultado.getInt("campeonato"));
                 return atleta;
             }
 
