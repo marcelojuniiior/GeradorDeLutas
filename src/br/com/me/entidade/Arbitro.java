@@ -20,6 +20,23 @@ public class Arbitro {
     private String telefone;
     private String campeonato;
 
+    public Arbitro(String nome, String dtnascimento, String nacionalidade, String estado, String cpf, String telefone, String campeonato) {
+       
+        this.nome = nome;
+        this.dtnascimento = dtnascimento;
+        this.nacionalidade = nacionalidade;
+        this.estado = estado;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.campeonato = campeonato;
+    }
+
+    public Arbitro() {
+       
+    }
+    
+    
+
     public String getCampeonato() {
         return campeonato;
     }
