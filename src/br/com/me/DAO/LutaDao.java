@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,10 +32,24 @@ public class LutaDao {
             return resultado = prepararsql.executeQuery();
                       
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO AO PESQUISAR ATLETAS CAMEPONATO");
         }
         return null;
     } 
-    }
+    
+   public void salvandofase(String nome){
+    String sql = "INSERT INTO fase (nome) values (?)";
+    try {
+            conexao = FabricaConexao.abrirConexao();
+            prepararsql = conexao.prepareStatement(sql);
+            prepararsql.setString(1, nome);
+            prepararsql.executeUpdate();
+                      
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO AO SALVAR FASE1");
+        }
+}
+}
 //    public List<Atleta> atletasCampeonato(int id) {
 //        String sql = "SELECT * FROM atleta where campeonato =?";
 //        Atleta atleta;

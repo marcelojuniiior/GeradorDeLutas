@@ -13,6 +13,8 @@ import br.com.me.entidade.Atleta;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,7 +63,6 @@ public class Lutas extends javax.swing.JInternalFrame {
         abaCampArbitros = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblArbitros = new javax.swing.JTable();
-        btArbitros = new javax.swing.JButton();
         abaCampLutas = new javax.swing.JPanel();
         luta1 = new javax.swing.JLabel();
         luta2 = new javax.swing.JLabel();
@@ -96,14 +97,14 @@ public class Lutas extends javax.swing.JInternalFrame {
         vesus7 = new javax.swing.JLabel();
         vesus8 = new javax.swing.JLabel();
         Arbitro = new javax.swing.JLabel();
-        varDtLuta1 = new javax.swing.JTextField();
-        varDtLuta2 = new javax.swing.JTextField();
-        varDtLuta3 = new javax.swing.JTextField();
-        varDtLuta4 = new javax.swing.JTextField();
-        varDtLuta5 = new javax.swing.JTextField();
-        varDtLuta6 = new javax.swing.JTextField();
-        varDtLuta7 = new javax.swing.JTextField();
-        varDtLuta8 = new javax.swing.JTextField();
+        varArbitroLt1 = new javax.swing.JTextField();
+        varArbitroLt2 = new javax.swing.JTextField();
+        varArbitroLt3 = new javax.swing.JTextField();
+        varArbitroLt4 = new javax.swing.JTextField();
+        varArbitroLt5 = new javax.swing.JTextField();
+        varArbitroLt6 = new javax.swing.JTextField();
+        varArbitroLt7 = new javax.swing.JTextField();
+        varArbitroLt8 = new javax.swing.JTextField();
         btSalvarLutas = new javax.swing.JButton();
         abaCampQuartas = new javax.swing.JPanel();
         quartas1 = new javax.swing.JLabel();
@@ -276,25 +277,17 @@ public class Lutas extends javax.swing.JInternalFrame {
             tblArbitros.getColumnModel().getColumn(3).setPreferredWidth(50);
         }
 
-        btArbitros.setText("Sortear");
-
         javax.swing.GroupLayout abaCampArbitrosLayout = new javax.swing.GroupLayout(abaCampArbitros);
         abaCampArbitros.setLayout(abaCampArbitrosLayout);
         abaCampArbitrosLayout.setHorizontalGroup(
             abaCampArbitrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
-            .addGroup(abaCampArbitrosLayout.createSequentialGroup()
-                .addGap(211, 211, 211)
-                .addComponent(btArbitros)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         abaCampArbitrosLayout.setVerticalGroup(
             abaCampArbitrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(abaCampArbitrosLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btArbitros)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         tblCamp.addTab("Arbitros", abaCampArbitros);
@@ -396,16 +389,21 @@ public class Lutas extends javax.swing.JInternalFrame {
         Arbitro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Arbitro.setText("Arbitro");
         abaCampLutas.add(Arbitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
-        abaCampLutas.add(varDtLuta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 30, 90, -1));
-        abaCampLutas.add(varDtLuta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 61, 90, -1));
-        abaCampLutas.add(varDtLuta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 92, 90, -1));
-        abaCampLutas.add(varDtLuta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 123, 90, -1));
-        abaCampLutas.add(varDtLuta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 154, 90, -1));
-        abaCampLutas.add(varDtLuta6, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 185, 90, -1));
-        abaCampLutas.add(varDtLuta7, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 216, 90, -1));
-        abaCampLutas.add(varDtLuta8, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 247, 90, -1));
+        abaCampLutas.add(varArbitroLt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 30, 90, -1));
+        abaCampLutas.add(varArbitroLt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 61, 90, -1));
+        abaCampLutas.add(varArbitroLt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 92, 90, -1));
+        abaCampLutas.add(varArbitroLt4, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 123, 90, -1));
+        abaCampLutas.add(varArbitroLt5, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 154, 90, -1));
+        abaCampLutas.add(varArbitroLt6, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 185, 90, -1));
+        abaCampLutas.add(varArbitroLt7, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 216, 90, -1));
+        abaCampLutas.add(varArbitroLt8, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 247, 90, -1));
 
         btSalvarLutas.setText("Vencedores");
+        btSalvarLutas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalvarLutasActionPerformed(evt);
+            }
+        });
         abaCampLutas.add(btSalvarLutas, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, -1));
 
         tblCamp.addTab("Lutas", abaCampLutas);
@@ -681,28 +679,19 @@ public class Lutas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btPesquisaActionPerformed
 
     private void btSortearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSortearActionPerformed
-        int id = Integer.parseInt(varIDpesquisa.getText().trim());
-
-        LutaDao lutadao = new LutaDao();
-        ResultSet atletasPesquisados = lutadao.atletasCampeonato(id);
-        List<Atleta> atletas = new ArrayList<Atleta>();
-        try {
-            while (atletasPesquisados.next()) {
-                Atleta atleta = new Atleta();
-
-                atleta.setId(atletasPesquisados.getInt("id"));
-                atleta.setNome(atletasPesquisados.getString("nome"));
-                atleta.setNacionalidade(atletasPesquisados.getString("País"));
-                atleta.setAltura(Double.parseDouble(atletasPesquisados.getString("altura")));
-                atleta.setPeso(Double.parseDouble(atletasPesquisados.getString("pesoKG")));
-                atleta.setCategoria(atletasPesquisados.getString("categoria"));
-                atletas.add(atleta);
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao pesquisar atletacampeonato" + ex);
-        }
+        atletasSorteioCampeonato();
+        arbitroSorteioCampeonato();
+        
+        this.tblCamp.setSelectedIndex(2);
+        btSortear.setEnabled(false);
         
     }//GEN-LAST:event_btSortearActionPerformed
+
+    private void btSalvarLutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarLutasActionPerformed
+        Vencedores1 vencedores1 =  new Vencedores1();
+        vencedores1.setVisible(true);
+        
+    }//GEN-LAST:event_btSalvarLutasActionPerformed
     public void pesquisandoArbitroCampeonato() {
         int id = Integer.parseInt(varIDpesquisa.getText().trim());
 
@@ -731,6 +720,7 @@ public class Lutas extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{
                 arbitro.getId(), arbitro.getNome(), arbitro.getNacionalidade(), arbitro.getEstado()});
         }
+        
     }
 
     public void pesquisandoAtletaCampeonato() {
@@ -760,8 +750,109 @@ public class Lutas extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{atleta.getId(), atleta.getNome(), atleta.getNacionalidade(),
                 +atleta.getAltura(), atleta.getPeso(), atleta.getCategoria()});
         }
+        if(atletas.size() <16){
+            btSortear.setEnabled(false);
+        }
     }
 
+    public void atletasSorteioCampeonato() {
+        int id = Integer.parseInt(varIDpesquisa.getText().trim());
+
+        LutaDao lutadao = new LutaDao();
+        ResultSet atletasPesquisados = lutadao.atletasCampeonato(id);
+        List<Atleta> atletas = new ArrayList<Atleta>();
+        try {
+            while (atletasPesquisados.next()) {
+                Atleta atleta = new Atleta();
+
+                atleta.setId(atletasPesquisados.getInt("id"));
+                atleta.setNome(atletasPesquisados.getString("nome"));
+                atleta.setNacionalidade(atletasPesquisados.getString("País"));
+                atleta.setAltura(Double.parseDouble(atletasPesquisados.getString("altura")));
+                atleta.setPeso(Double.parseDouble(atletasPesquisados.getString("pesoKG")));
+                atleta.setCategoria(atletasPesquisados.getString("categoria"));
+                atletas.add(atleta);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "erro ao pesquisar atletacampeonato" + ex);
+        }
+        sorteandoAtletas(atletas);
+    }
+
+    public void arbitroSorteioCampeonato() {
+        int id = Integer.parseInt(varIDpesquisa.getText().trim());
+
+        ArbitroDao arbitroDao = new ArbitroDao();
+        ResultSet resultadopesquisa = arbitroDao.pesquisarArbitro(id);
+
+        List<Arbitro> arbitros = new ArrayList<Arbitro>();
+        try {
+            while (resultadopesquisa.next()) {
+                Arbitro arbitro = new Arbitro();
+                arbitro.setId(resultadopesquisa.getInt("Id"));
+                arbitro.setNome(resultadopesquisa.getString("Nome"));
+                arbitro.setNacionalidade(resultadopesquisa.getString("País"));
+                arbitro.setEstado(resultadopesquisa.getString("Estado"));
+                arbitro.setTelefone(resultadopesquisa.getString("Telefone"));
+                arbitro.setCpf(resultadopesquisa.getString("Cpf"));
+                arbitros.add(arbitro);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao pesquisar ArbitroCampeonato");
+        }
+        sorteandoArbitros(arbitros);
+    }
+
+    public void sorteandoAtletas(List<Atleta> atletas) {
+        Collections.shuffle(atletas);
+        Atleta atleta0 = atletas.get(0);
+        var1Luta1.setText(atleta0.getNome());
+//        atletas.remove(0);
+        Atleta atleta1 = atletas.get(1);
+        var2Luta1.setText(atleta1.getNome());
+//        atletas.remove(1);
+
+        Atleta atleta2 = atletas.get(2);
+        var1Luta2.setText(atleta2.getNome());
+//        atletas.remove(2);
+        Atleta atleta3 = atletas.get(3);
+        var2Luta2.setText(atleta3.getNome());
+//        atletas.remove(3);
+
+        Atleta atleta4 = atletas.get(4);
+        var1Luta3.setText(atleta4.getNome());
+//        atletas.remove(4);
+        Atleta atleta5 = atletas.get(5);
+        var2Luta3.setText(atleta5.getNome());
+//        atletas.remove(5);
+    }
+
+    public void sorteandoArbitros(List<Arbitro> Arbitros) {
+        Collections.shuffle(Arbitros);
+        Arbitro arbitro0 = Arbitros.get(0);
+        varArbitroLt1.setText(arbitro0.getNome());
+
+        Arbitro arbitro1 = Arbitros.get(1);
+        varArbitroLt2.setText(arbitro1.getNome());
+
+        Arbitro arbitro2 = Arbitros.get(2);
+        varArbitroLt3.setText(arbitro2.getNome());
+
+        Arbitro arbitro3 = Arbitros.get(3);
+        varArbitroLt4.setText(arbitro3.getNome());
+
+        Arbitro arbitro4 = Arbitros.get(4);
+        varArbitroLt5.setText(arbitro4.getNome());
+
+        Arbitro arbitro5 = Arbitros.get(0);
+        varArbitroLt6.setText(arbitro5.getNome());
+
+        Arbitro arbitro6 = Arbitros.get(6);
+        varArbitroLt7.setText(arbitro6.getNome());
+
+        Arbitro arbitro7 = Arbitros.get(7);
+        varArbitroLt8.setText(arbitro7.getNome());
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Arbitro;
     private javax.swing.JLabel Final;
@@ -778,7 +869,6 @@ public class Lutas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel abaCampLutas;
     private javax.swing.JPanel abaCampQuartas;
     private javax.swing.JPanel abaCampSemi;
-    private javax.swing.JButton btArbitros;
     private javax.swing.JButton btPesquisa;
     private javax.swing.JButton btQuartasSalvar;
     private javax.swing.JButton btSalvarFinal;
@@ -820,18 +910,18 @@ public class Lutas extends javax.swing.JInternalFrame {
     private javax.swing.JTextField var2Luta8;
     private javax.swing.JLabel varArbitroFinal;
     private javax.swing.JLabel varArbitroFinal1;
+    private javax.swing.JTextField varArbitroLt1;
+    private javax.swing.JTextField varArbitroLt2;
+    private javax.swing.JTextField varArbitroLt3;
+    private javax.swing.JTextField varArbitroLt4;
+    private javax.swing.JTextField varArbitroLt5;
+    private javax.swing.JTextField varArbitroLt6;
+    private javax.swing.JTextField varArbitroLt7;
+    private javax.swing.JTextField varArbitroLt8;
     private javax.swing.JLabel varArbitroQuartas;
     private javax.swing.JLabel varArbitroSemi;
     private javax.swing.JButton varBtSemiSalvar;
     private javax.swing.JTextField varDtFinal;
-    private javax.swing.JTextField varDtLuta1;
-    private javax.swing.JTextField varDtLuta2;
-    private javax.swing.JTextField varDtLuta3;
-    private javax.swing.JTextField varDtLuta4;
-    private javax.swing.JTextField varDtLuta5;
-    private javax.swing.JTextField varDtLuta6;
-    private javax.swing.JTextField varDtLuta7;
-    private javax.swing.JTextField varDtLuta8;
     private javax.swing.JTextField varDtQuartas1;
     private javax.swing.JTextField varDtQuartas2;
     private javax.swing.JTextField varDtQuartas3;
