@@ -198,6 +198,12 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
         lblEstado1.setForeground(new java.awt.Color(255, 255, 255));
         lblEstado1.setText("Campeonato:");
         kGradientPanel1.add(lblEstado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, -1, -1));
+
+        varCampeonato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                varCampeonatoActionPerformed(evt);
+            }
+        });
         kGradientPanel1.add(varCampeonato, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, 223, -1));
 
         btAdicionarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/me/icones/icone add usuario.png"))); // NOI18N
@@ -340,6 +346,10 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_btAlterarUsuarioActionPerformed
+
+    private void varCampeonatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_varCampeonatoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_varCampeonatoActionPerformed
 
     public void limparcampos() {
         varAltura.setText("");

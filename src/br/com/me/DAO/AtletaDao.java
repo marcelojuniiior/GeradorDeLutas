@@ -25,7 +25,7 @@ public class AtletaDao {
     public boolean adicionarAtleta(Atleta atleta) throws SQLException {
 
         String sql = "INSERT INTO atleta(nome, dtnascimento, altura, peso,"
-                + "nacionalidade, estado, categoria, cpf, telefone, campeonato)"
+                + "nacionalidade, estado, categoria, cpf, telefone, idcampeonato)"
                 + " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             conexao = FabricaConexao.abrirConexao();

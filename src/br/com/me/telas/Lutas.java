@@ -6,21 +6,21 @@
 package br.com.me.telas;
 
 import br.com.me.DAO.ArbitroDao;
-import br.com.me.DAO.AtletaDao;
 import br.com.me.DAO.LutaDao;
 import br.com.me.entidade.Arbitro;
 import br.com.me.entidade.Atleta;
+import br.com.me.entidade.Campeonato;
+import br.com.me.entidade.Luta;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -36,9 +36,9 @@ public class Lutas extends javax.swing.JInternalFrame {
 
     }
 
-    public void setarcampos() {
-
-    }
+    Vector<Integer> idluta = new Vector<Integer>();
+    Vector<Integer> idarbitro = new Vector<Integer>();
+    Vector<Integer> idatleta = new Vector<Integer>();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,25 +97,42 @@ public class Lutas extends javax.swing.JInternalFrame {
         vesus7 = new javax.swing.JLabel();
         vesus8 = new javax.swing.JLabel();
         Arbitro = new javax.swing.JLabel();
-        varArbitroLt1 = new javax.swing.JTextField();
-        varArbitroLt2 = new javax.swing.JTextField();
-        varArbitroLt3 = new javax.swing.JTextField();
-        varArbitroLt4 = new javax.swing.JTextField();
-        varArbitroLt5 = new javax.swing.JTextField();
-        varArbitroLt6 = new javax.swing.JTextField();
-        varArbitroLt7 = new javax.swing.JTextField();
-        varArbitroLt8 = new javax.swing.JTextField();
         btSalvarLutas = new javax.swing.JButton();
+        varVencedor1 = new javax.swing.JComboBox<>();
+        luta9 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        luta10 = new javax.swing.JLabel();
+        luta11 = new javax.swing.JLabel();
+        luta12 = new javax.swing.JLabel();
+        luta13 = new javax.swing.JLabel();
+        luta14 = new javax.swing.JLabel();
+        luta15 = new javax.swing.JLabel();
+        luta16 = new javax.swing.JLabel();
+        varVencedor5 = new javax.swing.JComboBox<>();
+        varVencedor6 = new javax.swing.JComboBox<>();
+        varVencedor7 = new javax.swing.JComboBox<>();
+        varVencedor8 = new javax.swing.JComboBox<>();
+        varVencedor2 = new javax.swing.JComboBox<>();
+        varVencedor3 = new javax.swing.JComboBox<>();
+        varVencedor4 = new javax.swing.JComboBox<>();
+        varArbitroLt1 = new javax.swing.JComboBox<>();
+        varArbitroLt2 = new javax.swing.JComboBox<>();
+        varArbitroLt3 = new javax.swing.JComboBox<>();
+        varArbitroLt4 = new javax.swing.JComboBox<>();
+        varArbitroLt5 = new javax.swing.JComboBox<>();
+        varArbitroLt6 = new javax.swing.JComboBox<>();
+        varArbitroLt7 = new javax.swing.JComboBox<>();
+        varArbitroLt8 = new javax.swing.JComboBox<>();
         abaCampQuartas = new javax.swing.JPanel();
         quartas1 = new javax.swing.JLabel();
         varQuartas1Luta1 = new javax.swing.JTextField();
-        varQuartas1Luta2 = new javax.swing.JTextField();
         varQuartas2Luta1 = new javax.swing.JTextField();
+        varQuartas1Luta2 = new javax.swing.JTextField();
         varQuartas2Luta2 = new javax.swing.JTextField();
-        varQuartas3Luta1 = new javax.swing.JTextField();
-        varQuartas3Luta3 = new javax.swing.JTextField();
-        varQuartas4Luta1 = new javax.swing.JTextField();
-        varQuartas4Luta4 = new javax.swing.JTextField();
+        varQuartas1Luta3 = new javax.swing.JTextField();
+        varQuartas2Luta3 = new javax.swing.JTextField();
+        varQuartas1Luta4 = new javax.swing.JTextField();
+        varQuartas2Luta4 = new javax.swing.JTextField();
         versus1 = new javax.swing.JLabel();
         versus2 = new javax.swing.JLabel();
         versus3 = new javax.swing.JLabel();
@@ -124,39 +141,47 @@ public class Lutas extends javax.swing.JInternalFrame {
         versus6 = new javax.swing.JLabel();
         versus7 = new javax.swing.JLabel();
         varArbitroQuartas = new javax.swing.JLabel();
-        varDtQuartas1 = new javax.swing.JTextField();
-        varDtQuartas2 = new javax.swing.JTextField();
-        varDtQuartas3 = new javax.swing.JTextField();
-        varDtQuartas4 = new javax.swing.JTextField();
         btQuartasSalvar = new javax.swing.JButton();
+        varArbitroQuartas1 = new javax.swing.JComboBox<>();
+        varVencedorQuartas1 = new javax.swing.JComboBox<>();
+        quartas2 = new javax.swing.JLabel();
+        varArbitroQuartas2 = new javax.swing.JComboBox<>();
+        varVencedorQuartas2 = new javax.swing.JComboBox<>();
+        quartas3 = new javax.swing.JLabel();
+        varArbitroQuartas3 = new javax.swing.JComboBox<>();
+        quartas4 = new javax.swing.JLabel();
+        varVencedorQuartas3 = new javax.swing.JComboBox<>();
+        varArbitroQuartas4 = new javax.swing.JComboBox<>();
+        quartas5 = new javax.swing.JLabel();
+        varVencedorQuartas4 = new javax.swing.JComboBox<>();
         abaCampSemi = new javax.swing.JPanel();
         varArbitroSemi = new javax.swing.JLabel();
         Semi1 = new javax.swing.JLabel();
         Semi2 = new javax.swing.JLabel();
         varSemi1Luta1 = new javax.swing.JTextField();
-        varSemi1Luta2 = new javax.swing.JTextField();
-        varDtSemi1 = new javax.swing.JTextField();
         varSemi2Luta1 = new javax.swing.JTextField();
+        varSemi1Luta2 = new javax.swing.JTextField();
         varSemi2Luta2 = new javax.swing.JTextField();
         versus9 = new javax.swing.JLabel();
         versus10 = new javax.swing.JLabel();
-        varDtSemi2 = new javax.swing.JTextField();
         varBtSemiSalvar = new javax.swing.JButton();
+        varArbitroSemi1 = new javax.swing.JComboBox<>();
+        varArbitroSemi2 = new javax.swing.JComboBox<>();
+        varVencedorSemi1 = new javax.swing.JComboBox<>();
+        varVencedorSemi2 = new javax.swing.JComboBox<>();
+        Semi3 = new javax.swing.JLabel();
+        Semi4 = new javax.swing.JLabel();
         abaCampFinal = new javax.swing.JPanel();
         LogoFinal = new javax.swing.JLabel();
         Final = new javax.swing.JLabel();
         versus11 = new javax.swing.JLabel();
         varFinal1 = new javax.swing.JTextField();
         varFinal2 = new javax.swing.JTextField();
-        varArbitroFinal = new javax.swing.JLabel();
-        varDtFinal = new javax.swing.JTextField();
         btSalvarFinal = new javax.swing.JButton();
-        Final1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        versus12 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        varArbitroFinal1 = new javax.swing.JLabel();
+        arbitro = new javax.swing.JLabel();
+        varArbitroFinal1 = new javax.swing.JComboBox<>();
+        varArbitroFinal3 = new javax.swing.JLabel();
+        varVencedorFinal1 = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -281,13 +306,13 @@ public class Lutas extends javax.swing.JInternalFrame {
         abaCampArbitros.setLayout(abaCampArbitrosLayout);
         abaCampArbitrosLayout.setHorizontalGroup(
             abaCampArbitrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
         );
         abaCampArbitrosLayout.setVerticalGroup(
             abaCampArbitrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(abaCampArbitrosLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         tblCamp.addTab("Arbitros", abaCampArbitros);
@@ -323,88 +348,147 @@ public class Lutas extends javax.swing.JInternalFrame {
         abaCampLutas.add(luta7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 216, -1, -1));
 
         luta8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        luta8.setText("Luta 8:");
-        abaCampLutas.add(luta8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 247, -1, -1));
-        abaCampLutas.add(var1Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 30, 149, -1));
-        abaCampLutas.add(var2Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 30, 149, -1));
+        luta8.setText("Vencedor 5:");
+        abaCampLutas.add(luta8, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, -1, -1));
+        abaCampLutas.add(var1Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 149, -1));
+        abaCampLutas.add(var2Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 149, -1));
 
         var1Luta2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 var1Luta2ActionPerformed(evt);
             }
         });
-        abaCampLutas.add(var1Luta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 61, 149, -1));
-        abaCampLutas.add(var2Luta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 61, 149, -1));
-        abaCampLutas.add(var1Luta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 92, 149, -1));
-        abaCampLutas.add(var2Luta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 92, 149, -1));
-        abaCampLutas.add(var1Luta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 123, 149, -1));
-        abaCampLutas.add(var2Luta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 123, 149, -1));
-        abaCampLutas.add(var1Luta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 154, 149, -1));
-        abaCampLutas.add(var2Luta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 154, 149, -1));
-        abaCampLutas.add(var1Luta6, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 185, 149, -1));
-        abaCampLutas.add(var2Luta6, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 185, 149, -1));
-        abaCampLutas.add(var1Luta7, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 216, 149, -1));
+        abaCampLutas.add(var1Luta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 149, -1));
+        abaCampLutas.add(var2Luta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 149, -1));
+        abaCampLutas.add(var1Luta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 149, -1));
+        abaCampLutas.add(var2Luta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 149, -1));
+        abaCampLutas.add(var1Luta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 149, -1));
+        abaCampLutas.add(var2Luta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 149, -1));
+        abaCampLutas.add(var1Luta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 149, -1));
+        abaCampLutas.add(var2Luta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, 149, -1));
+        abaCampLutas.add(var1Luta6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 149, -1));
+        abaCampLutas.add(var2Luta6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 149, -1));
+        abaCampLutas.add(var1Luta7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 149, -1));
 
         var2Luta7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 var2Luta7ActionPerformed(evt);
             }
         });
-        abaCampLutas.add(var2Luta7, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 216, 149, -1));
-        abaCampLutas.add(var1Luta8, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 247, 149, -1));
-        abaCampLutas.add(var2Luta8, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 247, 149, -1));
+        abaCampLutas.add(var2Luta7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 149, -1));
+        abaCampLutas.add(var1Luta8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 149, -1));
+        abaCampLutas.add(var2Luta8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 149, -1));
 
         vesus1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         vesus1.setText("X");
-        abaCampLutas.add(vesus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 30, -1, -1));
+        abaCampLutas.add(vesus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, -1, -1));
 
         vesus2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         vesus2.setText("X");
-        abaCampLutas.add(vesus2, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 61, -1, -1));
+        abaCampLutas.add(vesus2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, -1, -1));
 
         vesus3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         vesus3.setText("X");
-        abaCampLutas.add(vesus3, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 92, -1, -1));
+        abaCampLutas.add(vesus3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, -1, -1));
 
         vesus4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         vesus4.setText("X");
-        abaCampLutas.add(vesus4, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 123, -1, -1));
+        abaCampLutas.add(vesus4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, -1, -1));
 
         vesus5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         vesus5.setText("X");
-        abaCampLutas.add(vesus5, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 154, -1, -1));
+        abaCampLutas.add(vesus5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, -1, -1));
 
         vesus6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         vesus6.setText("X");
-        abaCampLutas.add(vesus6, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 185, -1, -1));
+        abaCampLutas.add(vesus6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, -1));
 
         vesus7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         vesus7.setText("X");
-        abaCampLutas.add(vesus7, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 216, -1, -1));
+        abaCampLutas.add(vesus7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, -1, -1));
 
         vesus8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         vesus8.setText("X");
-        abaCampLutas.add(vesus8, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 247, -1, -1));
+        abaCampLutas.add(vesus8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
 
         Arbitro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Arbitro.setText("Arbitro");
         abaCampLutas.add(Arbitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
-        abaCampLutas.add(varArbitroLt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 30, 90, -1));
-        abaCampLutas.add(varArbitroLt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 61, 90, -1));
-        abaCampLutas.add(varArbitroLt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 92, 90, -1));
-        abaCampLutas.add(varArbitroLt4, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 123, 90, -1));
-        abaCampLutas.add(varArbitroLt5, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 154, 90, -1));
-        abaCampLutas.add(varArbitroLt6, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 185, 90, -1));
-        abaCampLutas.add(varArbitroLt7, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 216, 90, -1));
-        abaCampLutas.add(varArbitroLt8, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 247, 90, -1));
 
-        btSalvarLutas.setText("Vencedores");
+        btSalvarLutas.setText("SALVAR");
         btSalvarLutas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSalvarLutasActionPerformed(evt);
             }
         });
-        abaCampLutas.add(btSalvarLutas, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, -1));
+        abaCampLutas.add(btSalvarLutas, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, -1, -1));
+
+        abaCampLutas.add(varVencedor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 150, -1));
+
+        luta9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        luta9.setText("Luta 8:");
+        abaCampLutas.add(luta9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 247, -1, -1));
+        abaCampLutas.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 490, 20));
+
+        luta10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        luta10.setText("Vencedor 8:");
+        abaCampLutas.add(luta10, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, 20));
+
+        luta11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        luta11.setText("Vencedor 1:");
+        abaCampLutas.add(luta11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
+
+        luta12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        luta12.setText("Vencedor 2:");
+        abaCampLutas.add(luta12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
+
+        luta13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        luta13.setText("Vencedor 3:");
+        abaCampLutas.add(luta13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, 20));
+
+        luta14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        luta14.setText("Vencedor 4:");
+        abaCampLutas.add(luta14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, -1, 20));
+
+        luta15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        luta15.setText("Vencedor 6:");
+        abaCampLutas.add(luta15, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, -1, 20));
+
+        luta16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        luta16.setText("Vencedor 7:");
+        abaCampLutas.add(luta16, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 340, -1, 20));
+
+        abaCampLutas.add(varVencedor5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 140, -1));
+
+        abaCampLutas.add(varVencedor6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, 140, -1));
+
+        abaCampLutas.add(varVencedor7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, 140, -1));
+
+        abaCampLutas.add(varVencedor8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 370, 140, -1));
+
+        abaCampLutas.add(varVencedor2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 150, -1));
+
+        abaCampLutas.add(varVencedor3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, 150, -1));
+
+        abaCampLutas.add(varVencedor4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, 150, -1));
+
+        abaCampLutas.add(varArbitroLt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 120, -1));
+
+        varArbitroLt2.setForeground(new java.awt.Color(255, 255, 255));
+        varArbitroLt2.setOpaque(false);
+        abaCampLutas.add(varArbitroLt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 120, -1));
+
+        abaCampLutas.add(varArbitroLt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 120, -1));
+
+        abaCampLutas.add(varArbitroLt4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 120, -1));
+
+        abaCampLutas.add(varArbitroLt5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, 120, -1));
+
+        abaCampLutas.add(varArbitroLt6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 120, -1));
+
+        abaCampLutas.add(varArbitroLt7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 120, -1));
+
+        abaCampLutas.add(varArbitroLt8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 120, -1));
 
         tblCamp.addTab("Lutas", abaCampLutas);
 
@@ -412,54 +496,87 @@ public class Lutas extends javax.swing.JInternalFrame {
 
         quartas1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         quartas1.setText("Quartas 1:");
-        abaCampQuartas.add(quartas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 82, -1, -1));
-        abaCampQuartas.add(varQuartas1Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 82, 149, -1));
-        abaCampQuartas.add(varQuartas1Luta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 82, 149, -1));
-        abaCampQuartas.add(varQuartas2Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 137, 149, -1));
-        abaCampQuartas.add(varQuartas2Luta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 137, 149, -1));
-        abaCampQuartas.add(varQuartas3Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 243, 149, -1));
-        abaCampQuartas.add(varQuartas3Luta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 243, 149, -1));
-        abaCampQuartas.add(varQuartas4Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 292, 149, -1));
-        abaCampQuartas.add(varQuartas4Luta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 292, 149, -1));
+        abaCampQuartas.add(quartas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
+        abaCampQuartas.add(varQuartas1Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 149, -1));
+        abaCampQuartas.add(varQuartas2Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 149, -1));
+        abaCampQuartas.add(varQuartas1Luta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 149, -1));
+        abaCampQuartas.add(varQuartas2Luta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 149, -1));
+        abaCampQuartas.add(varQuartas1Luta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 149, -1));
+        abaCampQuartas.add(varQuartas2Luta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 149, -1));
+        abaCampQuartas.add(varQuartas1Luta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 149, -1));
+        abaCampQuartas.add(varQuartas2Luta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, 149, -1));
 
         versus1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         versus1.setText("X");
-        abaCampQuartas.add(versus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 82, -1, -1));
+        abaCampQuartas.add(versus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, -1, -1));
 
         versus2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         versus2.setText("X");
-        abaCampQuartas.add(versus2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 137, -1, -1));
+        abaCampQuartas.add(versus2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, -1, -1));
 
         versus3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         versus3.setText("X");
-        abaCampQuartas.add(versus3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 243, -1, -1));
+        abaCampQuartas.add(versus3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
 
         versus4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         versus4.setText("X");
-        abaCampQuartas.add(versus4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 292, -1, -1));
+        abaCampQuartas.add(versus4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, -1, -1));
 
         versus5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         versus5.setText("Quartas 2:");
-        abaCampQuartas.add(versus5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 137, -1, -1));
+        abaCampQuartas.add(versus5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, -1, -1));
 
         versus6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         versus6.setText("Quartas 3:");
-        abaCampQuartas.add(versus6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 243, -1, -1));
+        abaCampQuartas.add(versus6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, -1, -1));
 
         versus7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         versus7.setText("Quartas 4:");
-        abaCampQuartas.add(versus7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 292, -1, -1));
+        abaCampQuartas.add(versus7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, -1, -1));
 
         varArbitroQuartas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         varArbitroQuartas.setText("Arbitro");
-        abaCampQuartas.add(varArbitroQuartas, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, -1, -1));
-        abaCampQuartas.add(varDtQuartas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 82, 90, -1));
-        abaCampQuartas.add(varDtQuartas2, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 137, 90, -1));
-        abaCampQuartas.add(varDtQuartas3, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 243, 90, -1));
-        abaCampQuartas.add(varDtQuartas4, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 292, 90, -1));
+        abaCampQuartas.add(varArbitroQuartas, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
 
-        btQuartasSalvar.setText("Vencedores");
-        abaCampQuartas.add(btQuartasSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 342, -1, -1));
+        btQuartasSalvar.setText("SALVAR");
+        btQuartasSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btQuartasSalvarActionPerformed(evt);
+            }
+        });
+        abaCampQuartas.add(btQuartasSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, -1, -1));
+
+        abaCampQuartas.add(varArbitroQuartas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 120, -1));
+
+        abaCampQuartas.add(varVencedorQuartas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 121, -1));
+
+        quartas2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        quartas2.setText("Vencedor:");
+        abaCampQuartas.add(quartas2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
+
+        abaCampQuartas.add(varArbitroQuartas2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 120, -1));
+
+        abaCampQuartas.add(varVencedorQuartas2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 123, -1));
+
+        quartas3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        quartas3.setText("Vencedor:");
+        abaCampQuartas.add(quartas3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
+
+        abaCampQuartas.add(varArbitroQuartas3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 234, 119, -1));
+
+        quartas4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        quartas4.setText("Vencedor:");
+        abaCampQuartas.add(quartas4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
+
+        abaCampQuartas.add(varVencedorQuartas3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 118, -1));
+
+        abaCampQuartas.add(varArbitroQuartas4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 314, 119, -1));
+
+        quartas5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        quartas5.setText("Vencedor:");
+        abaCampQuartas.add(quartas5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, -1, -1));
+
+        abaCampQuartas.add(varVencedorQuartas4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 119, -1));
 
         tblCamp.addTab("Quartas de final", abaCampQuartas);
 
@@ -470,29 +587,48 @@ public class Lutas extends javax.swing.JInternalFrame {
         abaCampSemi.add(varArbitroSemi, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, -1, -1));
 
         Semi1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        Semi1.setText("Semi 1:");
-        abaCampSemi.add(Semi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 48, -1, -1));
+        Semi1.setText("Vencedor:");
+        abaCampSemi.add(Semi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, -1, -1));
 
         Semi2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Semi2.setText("Semi 2:");
-        abaCampSemi.add(Semi2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, -1, -1));
-        abaCampSemi.add(varSemi1Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 149, -1));
-        abaCampSemi.add(varSemi1Luta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 149, -1));
-        abaCampSemi.add(varDtSemi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 100, -1));
-        abaCampSemi.add(varSemi2Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 149, -1));
-        abaCampSemi.add(varSemi2Luta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 149, -1));
+        abaCampSemi.add(Semi2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, -1, -1));
+        abaCampSemi.add(varSemi1Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 149, -1));
+        abaCampSemi.add(varSemi2Luta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 149, -1));
+        abaCampSemi.add(varSemi1Luta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 149, -1));
+        abaCampSemi.add(varSemi2Luta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 149, -1));
 
         versus9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         versus9.setText("X");
-        abaCampSemi.add(versus9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, -1));
+        abaCampSemi.add(versus9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
 
         versus10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         versus10.setText("X");
-        abaCampSemi.add(versus10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, -1));
-        abaCampSemi.add(varDtSemi2, new org.netbeans.lib.awtextra.AbsoluteConstraints(382, 200, 100, -1));
+        abaCampSemi.add(versus10, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, -1, -1));
 
-        varBtSemiSalvar.setText("Vencedores");
-        abaCampSemi.add(varBtSemiSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 298, -1, -1));
+        varBtSemiSalvar.setText("SALVAR");
+        varBtSemiSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                varBtSemiSalvarActionPerformed(evt);
+            }
+        });
+        abaCampSemi.add(varBtSemiSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, -1));
+
+        abaCampSemi.add(varArbitroSemi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 130, -1));
+
+        abaCampSemi.add(varArbitroSemi2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 130, -1));
+
+        abaCampSemi.add(varVencedorSemi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 130, -1));
+
+        abaCampSemi.add(varVencedorSemi2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 130, -1));
+
+        Semi3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Semi3.setText("Semi 1:");
+        abaCampSemi.add(Semi3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, -1, -1));
+
+        Semi4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Semi4.setText("Vencedor:");
+        abaCampSemi.add(Semi4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
 
         tblCamp.addTab("Semi final", abaCampSemi);
 
@@ -510,96 +646,78 @@ public class Lutas extends javax.swing.JInternalFrame {
             }
         });
 
-        varArbitroFinal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        varArbitroFinal.setText("Arbitro:");
-
         btSalvarFinal.setText("Salvar");
 
-        Final1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        Final1.setText("TERCEIRO LUGAR");
+        arbitro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        arbitro.setText("Arbitro:");
 
-        versus12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        versus12.setText("x");
+        varArbitroFinal1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                varArbitroFinal1ActionPerformed(evt);
+            }
+        });
 
-        varArbitroFinal1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        varArbitroFinal1.setText("Arbitro:");
+        varArbitroFinal3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        varArbitroFinal3.setText("Vencedor:");
 
         javax.swing.GroupLayout abaCampFinalLayout = new javax.swing.GroupLayout(abaCampFinal);
         abaCampFinal.setLayout(abaCampFinalLayout);
         abaCampFinalLayout.setHorizontalGroup(
             abaCampFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(abaCampFinalLayout.createSequentialGroup()
-                .addGroup(abaCampFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(abaCampFinalLayout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addGroup(abaCampFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(abaCampFinalLayout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(versus12)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(abaCampFinalLayout.createSequentialGroup()
-                                .addComponent(varFinal1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(versus11)
-                                .addGap(22, 22, 22)
-                                .addComponent(varFinal2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(abaCampFinalLayout.createSequentialGroup()
-                        .addGap(210, 210, 210)
-                        .addComponent(btSalvarFinal))
-                    .addGroup(abaCampFinalLayout.createSequentialGroup()
-                        .addGap(184, 184, 184)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(abaCampFinalLayout.createSequentialGroup()
-                        .addGap(213, 213, 213)
-                        .addComponent(varArbitroFinal))
-                    .addGroup(abaCampFinalLayout.createSequentialGroup()
-                        .addGap(216, 216, 216)
-                        .addComponent(varArbitroFinal1))
-                    .addGroup(abaCampFinalLayout.createSequentialGroup()
-                        .addGap(202, 202, 202)
+                .addGroup(abaCampFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(abaCampFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(abaCampFinalLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(abaCampFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(abaCampFinalLayout.createSequentialGroup()
+                                    .addComponent(varFinal1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(versus11))
+                                .addComponent(varArbitroFinal3))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(abaCampFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(varVencedorFinal1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(abaCampFinalLayout.createSequentialGroup()
+                                    .addComponent(varFinal2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(varArbitroFinal1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(abaCampFinalLayout.createSequentialGroup()
+                            .addGap(164, 164, 164)
+                            .addComponent(btSalvarFinal)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, abaCampFinalLayout.createSequentialGroup()
+                        .addGap(157, 157, 157)
                         .addGroup(abaCampFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LogoFinal)
                             .addGroup(abaCampFinalLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(Final))))
-                    .addGroup(abaCampFinalLayout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addGroup(abaCampFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Final1)
-                            .addComponent(varDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(105, Short.MAX_VALUE))
+                                .addComponent(Final)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(arbitro)
+                                .addGap(40, 40, 40)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         abaCampFinalLayout.setVerticalGroup(
             abaCampFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(abaCampFinalLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addComponent(LogoFinal)
-                .addGap(5, 5, 5)
-                .addComponent(Final)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addGroup(abaCampFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(arbitro)
+                    .addComponent(Final))
+                .addGap(18, 18, 18)
                 .addGroup(abaCampFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(varFinal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(versus11)
                     .addComponent(varFinal2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(versus11))
-                .addGap(23, 23, 23)
-                .addComponent(varArbitroFinal1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(varDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Final1)
-                .addGap(14, 14, 14)
+                    .addComponent(varArbitroFinal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addGroup(abaCampFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(versus12))
-                .addGap(19, 19, 19)
-                .addComponent(varArbitroFinal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(varVencedorFinal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(varArbitroFinal3))
+                .addGap(32, 32, 32)
                 .addComponent(btSalvarFinal)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tblCamp.addTab("Final", abaCampFinal);
@@ -676,22 +794,369 @@ public class Lutas extends javax.swing.JInternalFrame {
     private void btPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisaActionPerformed
         pesquisandoArbitroCampeonato();
         pesquisandoAtletaCampeonato();
+        btPesquisa.setEnabled(false);
     }//GEN-LAST:event_btPesquisaActionPerformed
 
     private void btSortearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSortearActionPerformed
         atletasSorteioCampeonato();
         arbitroSorteioCampeonato();
-        
+
+        Campeonato campeonato = new Campeonato();
+        campeonato.setId(Integer.parseInt(varIDpesquisa.getText().trim()));
+
+        LutaDao lutas = new LutaDao();
+        lutas.salvandofase("Primeira Fase", campeonato);
+
         this.tblCamp.setSelectedIndex(2);
         btSortear.setEnabled(false);
-        
+        ResultSet atletasPesquisados = lutas.atletasCampeonato(campeonato.getId());
+        try {
+            while (atletasPesquisados.next()) {
+                Atleta atleta = new Atleta();
+
+                idatleta.addElement(atletasPesquisados.getInt("id"));
+                varVencedor1.addItem(atletasPesquisados.getString("nome"));
+                varVencedor2.addItem(atletasPesquisados.getString("nome"));
+                varVencedor3.addItem(atletasPesquisados.getString("nome"));
+                varVencedor4.addItem(atletasPesquisados.getString("nome"));
+                varVencedor5.addItem(atletasPesquisados.getString("nome"));
+                varVencedor6.addItem(atletasPesquisados.getString("nome"));
+                varVencedor7.addItem(atletasPesquisados.getString("nome"));
+                varVencedor8.addItem(atletasPesquisados.getString("nome"));
+                
+                varVencedorQuartas1.addItem(atletasPesquisados.getString("nome"));
+                varVencedorQuartas2.addItem(atletasPesquisados.getString("nome"));
+                varVencedorQuartas3.addItem(atletasPesquisados.getString("nome"));
+                varVencedorQuartas4.addItem(atletasPesquisados.getString("nome"));
+                
+                varVencedorSemi1.addItem(atletasPesquisados.getString("nome"));
+                varVencedorSemi2.addItem(atletasPesquisados.getString("nome"));
+               
+                varVencedorFinal1.addItem(atletasPesquisados.getString("nome"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "erro ao pesquisar atletacampeonato" + ex);
+        }
     }//GEN-LAST:event_btSortearActionPerformed
 
     private void btSalvarLutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarLutasActionPerformed
-        Vencedores1 vencedores1 =  new Vencedores1();
-        vencedores1.setVisible(true);
+        Campeonato campeonato = new Campeonato();
+        campeonato.setId(Integer.parseInt(varIDpesquisa.getText().trim()));
+
+        salvarLuta1Fase1(campeonato);
+        salvarLuta2Fase1(campeonato);
+        salvarLuta3Fase1(campeonato);
+        salvarLuta4Fase1(campeonato);
+        salvarLuta5Fase1(campeonato);
+        salvarLuta6Fase1(campeonato);
+        salvarLuta7Fase1(campeonato);
+        salvarLuta8Fase1(campeonato);
         
+        lutasQuartasDeFinais();
+        this.tblCamp.setSelectedIndex(3);
+        
+
     }//GEN-LAST:event_btSalvarLutasActionPerformed
+
+    private void varArbitroFinal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_varArbitroFinal1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_varArbitroFinal1ActionPerformed
+
+    private void btQuartasSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQuartasSalvarActionPerformed
+        LutaDao lutaDao = new LutaDao();
+        Campeonato campeonato = new Campeonato();
+        campeonato.setId(Integer.parseInt(varIDpesquisa.getText().trim()));
+        lutaDao.salvandofase("QuartasFinal", campeonato);
+        
+        salvandoQuartas1();
+        salvandoQuartas2();
+        salvandoQuartas3();
+        salvandoQuartas4();
+        
+        lutasSemiFinais();
+        this.tblCamp.setSelectedIndex(4);
+    }//GEN-LAST:event_btQuartasSalvarActionPerformed
+
+    private void varBtSemiSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_varBtSemiSalvarActionPerformed
+       LutaDao lutaDao = new LutaDao();
+        Campeonato campeonato = new Campeonato();
+        campeonato.setId(Integer.parseInt(varIDpesquisa.getText().trim()));
+        lutaDao.salvandofase("SemiFinal", campeonato);
+        
+        salvandoSemi1();
+        salvandoSemi2();
+        
+        
+        lutasFinal();
+        this.tblCamp.setSelectedIndex(5);
+    }//GEN-LAST:event_varBtSemiSalvarActionPerformed
+   public void lutasFinal(){
+       varFinal1.setText(varVencedorSemi1.getSelectedItem().toString());
+       varFinal2.setText(varVencedorSemi2.getSelectedItem().toString());
+   }
+    public void salvandoSemi2(){
+        LutaDao lutaDao = new LutaDao();
+        Luta luta = new Luta();
+
+        luta.setAtletaa1(varSemi1Luta2.getText().trim());
+        luta.setAtletaa2(varSemi2Luta2.getText().trim());
+        luta.setArbitroo(varArbitroSemi2.getSelectedItem().toString());
+        luta.setCampeonato(Integer.parseInt(varIDpesquisa.getText().trim()));
+        luta.setFasee("SemiFinal");
+        luta.setVencedor(idatleta.get(varVencedorSemi2.getSelectedIndex()));
+        lutaDao.salvandoVencedores2(luta);
+   }
+    public void salvandoSemi1(){
+        LutaDao lutaDao = new LutaDao();
+        Luta luta = new Luta();
+
+        luta.setAtletaa1(varSemi1Luta1.getText().trim());
+        luta.setAtletaa2(varSemi2Luta1.getText().trim());
+        luta.setArbitroo(varArbitroSemi1.getSelectedItem().toString());
+        luta.setCampeonato(Integer.parseInt(varIDpesquisa.getText().trim()));
+        luta.setFasee("SemiFinal");
+        luta.setVencedor(idatleta.get(varVencedorSemi1.getSelectedIndex()));
+        lutaDao.salvandoVencedores2(luta);
+   }
+    public void salvandoQuartas1(){
+        LutaDao lutaDao = new LutaDao();
+        Luta luta = new Luta();
+
+        luta.setAtletaa1(varQuartas1Luta1.getText().trim());
+        luta.setAtletaa2(varQuartas2Luta1.getText().trim());
+        luta.setArbitroo(varArbitroQuartas1.getSelectedItem().toString());
+        luta.setCampeonato(Integer.parseInt(varIDpesquisa.getText().trim()));
+        luta.setFasee("QuartasFinal");
+        luta.setVencedor(idatleta.get(varVencedorQuartas1.getSelectedIndex()));
+        lutaDao.salvandoVencedores2(luta);
+    }
+    public void salvandoQuartas2(){
+        LutaDao lutaDao = new LutaDao();
+        Luta luta = new Luta();
+
+        luta.setAtletaa1(varQuartas1Luta2.getText().trim());
+        luta.setAtletaa2(varQuartas2Luta2.getText().trim());
+        luta.setArbitroo(varArbitroQuartas2.getSelectedItem().toString());
+        luta.setCampeonato(Integer.parseInt(varIDpesquisa.getText().trim()));
+        luta.setFasee("QuartasFinal");
+        luta.setVencedor(idatleta.get(varVencedorQuartas2.getSelectedIndex()));
+        lutaDao.salvandoVencedores2(luta);
+    }
+    public void salvandoQuartas3(){
+        LutaDao lutaDao = new LutaDao();
+        Luta luta = new Luta();
+
+        luta.setAtletaa1(varQuartas1Luta3.getText().trim());
+        luta.setAtletaa2(varQuartas2Luta3.getText().trim());
+        luta.setArbitroo(varArbitroQuartas3.getSelectedItem().toString());
+        luta.setCampeonato(Integer.parseInt(varIDpesquisa.getText().trim()));
+        luta.setFasee("QuartasFinal");
+        luta.setVencedor(idatleta.get(varVencedorQuartas3.getSelectedIndex()));
+        lutaDao.salvandoVencedores2(luta);
+    }
+    public void salvandoQuartas4(){
+        LutaDao lutaDao = new LutaDao();
+        Luta luta = new Luta();
+
+        luta.setAtletaa1(varQuartas1Luta4.getText().trim());
+        luta.setAtletaa2(varQuartas2Luta4.getText().trim());
+        luta.setArbitroo(varArbitroQuartas4.getSelectedItem().toString());
+        luta.setCampeonato(Integer.parseInt(varIDpesquisa.getText().trim()));
+        luta.setFasee("QuartasFinal");
+        luta.setVencedor(idatleta.get(varVencedorQuartas4.getSelectedIndex()));
+        lutaDao.salvandoVencedores2(luta);
+    }
+    public void lutasSemiFinais(){
+        varSemi1Luta1.setText(varVencedorQuartas1.getSelectedItem().toString());
+        varSemi2Luta1.setText(varVencedorQuartas2.getSelectedItem().toString());
+        
+        varSemi1Luta2.setText(varVencedorQuartas3.getSelectedItem().toString());
+        varSemi2Luta2.setText(varVencedorQuartas4.getSelectedItem().toString());
+    }
+    public void lutasQuartasDeFinais(){
+        varQuartas1Luta1.setText(varVencedor1.getSelectedItem().toString());
+        varQuartas2Luta1.setText(varVencedor2.getSelectedItem().toString());
+        
+        varQuartas1Luta2.setText(varVencedor3.getSelectedItem().toString());
+        varQuartas2Luta2.setText(varVencedor4.getSelectedItem().toString());
+        
+        varQuartas1Luta3.setText(varVencedor5.getSelectedItem().toString());
+        varQuartas2Luta3.setText(varVencedor6.getSelectedItem().toString());
+        
+        varQuartas1Luta4.setText(varVencedor7.getSelectedItem().toString());
+        varQuartas2Luta4.setText(varVencedor8.getSelectedItem().toString());
+    }
+    public void salvarLuta1Fase1(Campeonato campeonato) {
+        LutaDao lutaDao = new LutaDao();
+        Luta luta = new Luta();
+        
+        luta.setAtleta1(idluta.get(0));
+        luta.setAtleta2(idluta.get(1));
+        luta.setArbitro(idarbitro.get(varArbitroLt1.getSelectedIndex()));
+        luta.setCampeonato(Integer.parseInt(varIDpesquisa.getText().trim()));
+        ResultSet lutapesquisa = lutaDao.pesquisandoFase(campeonato);
+        try {
+            if (lutapesquisa.next()) {
+                luta.setFase(lutapesquisa.getInt("idfase"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Salvar fase luta " + ex);
+        }
+
+        luta.setVencedor(idatleta.get(varVencedor1.getSelectedIndex()));
+        lutaDao.salvandoVencedores1(luta);
+    }
+
+    public void salvarLuta2Fase1(Campeonato campeonato) {
+        LutaDao lutaDao = new LutaDao();
+        Luta luta = new Luta();
+
+        luta = new Luta();
+        luta.setAtleta1(idluta.get(2));
+        luta.setAtleta2(idluta.get(3));
+        luta.setArbitro(idarbitro.get(varArbitroLt2.getSelectedIndex()));
+        luta.setCampeonato(Integer.parseInt(varIDpesquisa.getText().trim()));
+        ResultSet lutapesquisa = lutaDao.pesquisandoFase(campeonato);
+        try {
+            if (lutapesquisa.next()) {
+                luta.setFase(lutapesquisa.getInt("idfase"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Salvar fase luta " + ex);
+        }
+        luta.setVencedor(idatleta.get(varVencedor2.getSelectedIndex()));
+        lutaDao.salvandoVencedores1(luta);
+
+    }
+
+    public void salvarLuta3Fase1(Campeonato campeonato) {
+        LutaDao lutaDao = new LutaDao();
+        Luta luta = new Luta();
+
+        luta = new Luta();
+        luta.setAtleta1(idluta.get(4));
+        luta.setAtleta2(idluta.get(5));
+        luta.setArbitro(idarbitro.get(varArbitroLt3.getSelectedIndex()));
+        luta.setCampeonato(Integer.parseInt(varIDpesquisa.getText().trim()));
+        ResultSet lutapesquisa = lutaDao.pesquisandoFase(campeonato);
+        try {
+            if (lutapesquisa.next()) {
+                luta.setFase(lutapesquisa.getInt("idfase"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Salvar fase luta " + ex);
+        }
+        luta.setVencedor(idatleta.get(varVencedor3.getSelectedIndex()));
+        lutaDao.salvandoVencedores1(luta);
+
+    }
+    public void salvarLuta4Fase1(Campeonato campeonato) {
+        LutaDao lutaDao = new LutaDao();
+        Luta luta = new Luta();
+
+        luta = new Luta();
+        luta.setAtleta1(idluta.get(6));
+        luta.setAtleta2(idluta.get(7));
+        luta.setArbitro(idarbitro.get(varArbitroLt4.getSelectedIndex()));
+        luta.setCampeonato(Integer.parseInt(varIDpesquisa.getText().trim()));
+        ResultSet lutapesquisa = lutaDao.pesquisandoFase(campeonato);
+        try {
+            if (lutapesquisa.next()) {
+                luta.setFase(lutapesquisa.getInt("idfase"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Salvar fase luta " + ex);
+        }
+        luta.setVencedor(idatleta.get(varVencedor4.getSelectedIndex()));
+        lutaDao.salvandoVencedores1(luta);
+
+    }
+    public void salvarLuta5Fase1(Campeonato campeonato) {
+        LutaDao lutaDao = new LutaDao();
+        Luta luta = new Luta();
+
+        luta = new Luta();
+        luta.setAtleta1(idluta.get(8));
+        luta.setAtleta2(idluta.get(9));
+        luta.setArbitro(idarbitro.get(varArbitroLt5.getSelectedIndex()));
+        luta.setCampeonato(Integer.parseInt(varIDpesquisa.getText().trim()));
+        ResultSet lutapesquisa = lutaDao.pesquisandoFase(campeonato);
+        try {
+            if (lutapesquisa.next()) {
+                luta.setFase(lutapesquisa.getInt("idfase"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Salvar fase luta " + ex);
+        }
+        luta.setVencedor(idatleta.get(varVencedor5.getSelectedIndex()));
+        lutaDao.salvandoVencedores1(luta);
+
+    }
+    public void salvarLuta6Fase1(Campeonato campeonato) {
+        LutaDao lutaDao = new LutaDao();
+        Luta luta = new Luta();
+
+        luta = new Luta();
+        luta.setAtleta1(idluta.get(10));
+        luta.setAtleta2(idluta.get(11));
+        luta.setArbitro(idarbitro.get(varArbitroLt6.getSelectedIndex()));
+        luta.setCampeonato(Integer.parseInt(varIDpesquisa.getText().trim()));
+        ResultSet lutapesquisa = lutaDao.pesquisandoFase(campeonato);
+        try {
+            if (lutapesquisa.next()) {
+                luta.setFase(lutapesquisa.getInt("idfase"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Salvar fase luta " + ex);
+        }
+        luta.setVencedor(idatleta.get(varVencedor6.getSelectedIndex()));
+        lutaDao.salvandoVencedores1(luta);
+
+    }
+    public void salvarLuta7Fase1(Campeonato campeonato) {
+        LutaDao lutaDao = new LutaDao();
+        Luta luta = new Luta();
+
+        luta = new Luta();
+        luta.setAtleta1(idluta.get(12));
+        luta.setAtleta2(idluta.get(13));
+        luta.setArbitro(idarbitro.get(varArbitroLt7.getSelectedIndex()));
+        luta.setCampeonato(Integer.parseInt(varIDpesquisa.getText().trim()));
+        ResultSet lutapesquisa = lutaDao.pesquisandoFase(campeonato);
+        try {
+            if (lutapesquisa.next()) {
+                luta.setFase(lutapesquisa.getInt("idfase"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Salvar fase luta " + ex);
+        }
+        luta.setVencedor(idatleta.get(varVencedor7.getSelectedIndex()));
+        lutaDao.salvandoVencedores1(luta);
+
+    }
+    public void salvarLuta8Fase1(Campeonato campeonato) {
+        LutaDao lutaDao = new LutaDao();
+        Luta luta = new Luta();
+
+        luta = new Luta();
+        luta.setAtleta1(idluta.get(14));
+        luta.setAtleta2(idluta.get(15));
+        luta.setArbitro(idarbitro.get(varArbitroLt8.getSelectedIndex()));
+        luta.setCampeonato(Integer.parseInt(varIDpesquisa.getText().trim()));
+        ResultSet lutapesquisa = lutaDao.pesquisandoFase(campeonato);
+        try {
+            if (lutapesquisa.next()) {
+                luta.setFase(lutapesquisa.getInt("idfase"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Salvar fase luta " + ex);
+        }
+        luta.setVencedor(idatleta.get(varVencedor8.getSelectedIndex()));
+        lutaDao.salvandoVencedores1(luta);
+
+    }
+    
+
     public void pesquisandoArbitroCampeonato() {
         int id = Integer.parseInt(varIDpesquisa.getText().trim());
 
@@ -720,7 +1185,7 @@ public class Lutas extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{
                 arbitro.getId(), arbitro.getNome(), arbitro.getNacionalidade(), arbitro.getEstado()});
         }
-        
+
     }
 
     public void pesquisandoAtletaCampeonato() {
@@ -750,9 +1215,9 @@ public class Lutas extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{atleta.getId(), atleta.getNome(), atleta.getNacionalidade(),
                 +atleta.getAltura(), atleta.getPeso(), atleta.getCategoria()});
         }
-        if(atletas.size() <16){
-            btSortear.setEnabled(false);
-        }
+//        if(atletas.size() <16){
+//            btSortear.setEnabled(false);
+//        }
     }
 
     public void atletasSorteioCampeonato() {
@@ -796,72 +1261,145 @@ public class Lutas extends javax.swing.JInternalFrame {
                 arbitro.setTelefone(resultadopesquisa.getString("Telefone"));
                 arbitro.setCpf(resultadopesquisa.getString("Cpf"));
                 arbitros.add(arbitro);
+                varArbitroLt1.addItem(resultadopesquisa.getString("nome"));
+                varArbitroLt2.addItem(resultadopesquisa.getString("nome"));
+                varArbitroLt3.addItem(resultadopesquisa.getString("nome"));
+                varArbitroLt4.addItem(resultadopesquisa.getString("nome"));
+                varArbitroLt5.addItem(resultadopesquisa.getString("nome"));
+                varArbitroLt6.addItem(resultadopesquisa.getString("nome"));
+                varArbitroLt7.addItem(resultadopesquisa.getString("nome"));
+                varArbitroLt8.addItem(resultadopesquisa.getString("nome"));
+                
+                varArbitroQuartas1.addItem(resultadopesquisa.getString("nome"));
+                varArbitroQuartas2.addItem(resultadopesquisa.getString("nome"));
+                varArbitroQuartas3.addItem(resultadopesquisa.getString("nome"));
+                varArbitroQuartas4.addItem(resultadopesquisa.getString("nome"));
+                
+                varArbitroSemi1.addItem(resultadopesquisa.getString("nome"));
+                varArbitroSemi2.addItem(resultadopesquisa.getString("nome"));
+                
+                varArbitroFinal1.addItem(resultadopesquisa.getString("nome"));
+                idarbitro.addElement(resultadopesquisa.getInt("id"));
+                
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao pesquisar ArbitroCampeonato");
         }
-        sorteandoArbitros(arbitros);
+
     }
 
     public void sorteandoAtletas(List<Atleta> atletas) {
         Collections.shuffle(atletas);
+
         Atleta atleta0 = atletas.get(0);
         var1Luta1.setText(atleta0.getNome());
-//        atletas.remove(0);
+        idluta.addElement(atleta0.getId());
+
         Atleta atleta1 = atletas.get(1);
         var2Luta1.setText(atleta1.getNome());
-//        atletas.remove(1);
+        idluta.addElement(atleta1.getId());
 
         Atleta atleta2 = atletas.get(2);
         var1Luta2.setText(atleta2.getNome());
-//        atletas.remove(2);
+        idluta.addElement(atleta2.getId());
+
         Atleta atleta3 = atletas.get(3);
         var2Luta2.setText(atleta3.getNome());
-//        atletas.remove(3);
+        idluta.addElement(atleta3.getId());
 
         Atleta atleta4 = atletas.get(4);
         var1Luta3.setText(atleta4.getNome());
-//        atletas.remove(4);
+        idluta.addElement(atleta4.getId());
+
         Atleta atleta5 = atletas.get(5);
         var2Luta3.setText(atleta5.getNome());
-//        atletas.remove(5);
+        idluta.addElement(atleta5.getId());
+
+        Atleta atleta6 = atletas.get(6);
+        var1Luta4.setText(atleta6.getNome());
+        idluta.addElement(atleta6.getId());
+
+        Atleta atleta7 = atletas.get(7);
+        var2Luta4.setText(atleta7.getNome());
+        idluta.addElement(atleta7.getId());
+
+        Atleta atleta8 = atletas.get(8);
+        var1Luta5.setText(atleta8.getNome());
+        idluta.addElement(atleta8.getId());
+
+        Atleta atleta9 = atletas.get(9);
+        var2Luta5.setText(atleta9.getNome());
+        idluta.addElement(atleta9.getId());
+
+        Atleta atleta10 = atletas.get(10);
+        var1Luta6.setText(atleta10.getNome());
+        idluta.addElement(atleta10.getId());
+
+        Atleta atleta11 = atletas.get(11);
+        var2Luta6.setText(atleta11.getNome());
+        idluta.addElement(atleta11.getId());
+
+        Atleta atleta12 = atletas.get(12);
+        var1Luta7.setText(atleta12.getNome());
+        idluta.addElement(atleta12.getId());
+
+        Atleta atleta13 = atletas.get(13);
+        var2Luta7.setText(atleta13.getNome());
+        idluta.addElement(atleta13.getId());
+
+        Atleta atleta14 = atletas.get(14);
+        var1Luta8.setText(atleta14.getNome());
+        idluta.addElement(atleta14.getId());
+
+        Atleta atleta15 = atletas.get(15);
+        var2Luta8.setText(atleta15.getNome());
+        idluta.addElement(atleta15.getId());
     }
 
     public void sorteandoArbitros(List<Arbitro> Arbitros) {
         Collections.shuffle(Arbitros);
         Arbitro arbitro0 = Arbitros.get(0);
-        varArbitroLt1.setText(arbitro0.getNome());
+        varArbitroLt1.addItem(arbitro0.getNome());
+        idarbitro.addElement(arbitro0.getId());
 
         Arbitro arbitro1 = Arbitros.get(1);
-        varArbitroLt2.setText(arbitro1.getNome());
+        varArbitroLt2.addItem(arbitro1.getNome());
+        idarbitro.addElement(arbitro1.getId());
 
         Arbitro arbitro2 = Arbitros.get(2);
-        varArbitroLt3.setText(arbitro2.getNome());
+        varArbitroLt3.addItem(arbitro2.getNome());
+        idarbitro.addElement(arbitro2.getId());
 
         Arbitro arbitro3 = Arbitros.get(3);
-        varArbitroLt4.setText(arbitro3.getNome());
+        varArbitroLt4.addItem(arbitro3.getNome());
+        idarbitro.addElement(arbitro3.getId());
 
         Arbitro arbitro4 = Arbitros.get(4);
-        varArbitroLt5.setText(arbitro4.getNome());
+        varArbitroLt5.addItem(arbitro4.getNome());
+        idarbitro.addElement(arbitro4.getId());
 
         Arbitro arbitro5 = Arbitros.get(0);
-        varArbitroLt6.setText(arbitro5.getNome());
+        varArbitroLt6.addItem(arbitro5.getNome());
+        idarbitro.addElement(arbitro5.getId());
 
         Arbitro arbitro6 = Arbitros.get(6);
-        varArbitroLt7.setText(arbitro6.getNome());
+        varArbitroLt7.addItem(arbitro6.getNome());
+        idarbitro.addElement(arbitro6.getId());
 
         Arbitro arbitro7 = Arbitros.get(7);
-        varArbitroLt8.setText(arbitro7.getNome());
+        varArbitroLt8.addItem(arbitro7.getNome());
+        idarbitro.addElement(arbitro7.getId());
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Arbitro;
     private javax.swing.JLabel Final;
-    private javax.swing.JLabel Final1;
     private javax.swing.JLabel Id;
     private javax.swing.JLabel LOGO;
     private javax.swing.JLabel LogoFinal;
     private javax.swing.JLabel Semi1;
     private javax.swing.JLabel Semi2;
+    private javax.swing.JLabel Semi3;
+    private javax.swing.JLabel Semi4;
     private javax.swing.JLabel Titulo;
     private javax.swing.JPanel abaCampArbitros;
     private javax.swing.JPanel abaCampAtletas;
@@ -869,6 +1407,7 @@ public class Lutas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel abaCampLutas;
     private javax.swing.JPanel abaCampQuartas;
     private javax.swing.JPanel abaCampSemi;
+    private javax.swing.JLabel arbitro;
     private javax.swing.JButton btPesquisa;
     private javax.swing.JButton btQuartasSalvar;
     private javax.swing.JButton btSalvarFinal;
@@ -876,11 +1415,16 @@ public class Lutas extends javax.swing.JInternalFrame {
     private javax.swing.JButton btSortear;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JSeparator jSeparator1;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel luta1;
+    private javax.swing.JLabel luta10;
+    private javax.swing.JLabel luta11;
+    private javax.swing.JLabel luta12;
+    private javax.swing.JLabel luta13;
+    private javax.swing.JLabel luta14;
+    private javax.swing.JLabel luta15;
+    private javax.swing.JLabel luta16;
     private javax.swing.JLabel luta2;
     private javax.swing.JLabel luta3;
     private javax.swing.JLabel luta4;
@@ -888,7 +1432,12 @@ public class Lutas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel luta6;
     private javax.swing.JLabel luta7;
     private javax.swing.JLabel luta8;
+    private javax.swing.JLabel luta9;
     private javax.swing.JLabel quartas1;
+    private javax.swing.JLabel quartas2;
+    private javax.swing.JLabel quartas3;
+    private javax.swing.JLabel quartas4;
+    private javax.swing.JLabel quartas5;
     private javax.swing.JTable tblArbitros;
     private javax.swing.JTable tblAtletas;
     private javax.swing.JTabbedPane tblCamp;
@@ -908,45 +1457,58 @@ public class Lutas extends javax.swing.JInternalFrame {
     private javax.swing.JTextField var2Luta6;
     private javax.swing.JTextField var2Luta7;
     private javax.swing.JTextField var2Luta8;
-    private javax.swing.JLabel varArbitroFinal;
-    private javax.swing.JLabel varArbitroFinal1;
-    private javax.swing.JTextField varArbitroLt1;
-    private javax.swing.JTextField varArbitroLt2;
-    private javax.swing.JTextField varArbitroLt3;
-    private javax.swing.JTextField varArbitroLt4;
-    private javax.swing.JTextField varArbitroLt5;
-    private javax.swing.JTextField varArbitroLt6;
-    private javax.swing.JTextField varArbitroLt7;
-    private javax.swing.JTextField varArbitroLt8;
+    private javax.swing.JComboBox<String> varArbitroFinal1;
+    private javax.swing.JLabel varArbitroFinal3;
+    private javax.swing.JComboBox<String> varArbitroLt1;
+    private javax.swing.JComboBox<String> varArbitroLt2;
+    private javax.swing.JComboBox<String> varArbitroLt3;
+    private javax.swing.JComboBox<String> varArbitroLt4;
+    private javax.swing.JComboBox<String> varArbitroLt5;
+    private javax.swing.JComboBox<String> varArbitroLt6;
+    private javax.swing.JComboBox<String> varArbitroLt7;
+    private javax.swing.JComboBox<String> varArbitroLt8;
     private javax.swing.JLabel varArbitroQuartas;
+    private javax.swing.JComboBox<String> varArbitroQuartas1;
+    private javax.swing.JComboBox<String> varArbitroQuartas2;
+    private javax.swing.JComboBox<String> varArbitroQuartas3;
+    private javax.swing.JComboBox<String> varArbitroQuartas4;
     private javax.swing.JLabel varArbitroSemi;
+    private javax.swing.JComboBox<String> varArbitroSemi1;
+    private javax.swing.JComboBox<String> varArbitroSemi2;
     private javax.swing.JButton varBtSemiSalvar;
-    private javax.swing.JTextField varDtFinal;
-    private javax.swing.JTextField varDtQuartas1;
-    private javax.swing.JTextField varDtQuartas2;
-    private javax.swing.JTextField varDtQuartas3;
-    private javax.swing.JTextField varDtQuartas4;
-    private javax.swing.JTextField varDtSemi1;
-    private javax.swing.JTextField varDtSemi2;
     private javax.swing.JTextField varFinal1;
     private javax.swing.JTextField varFinal2;
     private javax.swing.JTextField varIDpesquisa;
     private javax.swing.JTextField varQuartas1Luta1;
     private javax.swing.JTextField varQuartas1Luta2;
+    private javax.swing.JTextField varQuartas1Luta3;
+    private javax.swing.JTextField varQuartas1Luta4;
     private javax.swing.JTextField varQuartas2Luta1;
     private javax.swing.JTextField varQuartas2Luta2;
-    private javax.swing.JTextField varQuartas3Luta1;
-    private javax.swing.JTextField varQuartas3Luta3;
-    private javax.swing.JTextField varQuartas4Luta1;
-    private javax.swing.JTextField varQuartas4Luta4;
+    private javax.swing.JTextField varQuartas2Luta3;
+    private javax.swing.JTextField varQuartas2Luta4;
     private javax.swing.JTextField varSemi1Luta1;
     private javax.swing.JTextField varSemi1Luta2;
     private javax.swing.JTextField varSemi2Luta1;
     private javax.swing.JTextField varSemi2Luta2;
+    private javax.swing.JComboBox<String> varVencedor1;
+    private javax.swing.JComboBox<String> varVencedor2;
+    private javax.swing.JComboBox<String> varVencedor3;
+    private javax.swing.JComboBox<String> varVencedor4;
+    private javax.swing.JComboBox<String> varVencedor5;
+    private javax.swing.JComboBox<String> varVencedor6;
+    private javax.swing.JComboBox<String> varVencedor7;
+    private javax.swing.JComboBox<String> varVencedor8;
+    private javax.swing.JComboBox<String> varVencedorFinal1;
+    private javax.swing.JComboBox<String> varVencedorQuartas1;
+    private javax.swing.JComboBox<String> varVencedorQuartas2;
+    private javax.swing.JComboBox<String> varVencedorQuartas3;
+    private javax.swing.JComboBox<String> varVencedorQuartas4;
+    private javax.swing.JComboBox<String> varVencedorSemi1;
+    private javax.swing.JComboBox<String> varVencedorSemi2;
     private javax.swing.JLabel versus1;
     private javax.swing.JLabel versus10;
     private javax.swing.JLabel versus11;
-    private javax.swing.JLabel versus12;
     private javax.swing.JLabel versus2;
     private javax.swing.JLabel versus3;
     private javax.swing.JLabel versus4;
