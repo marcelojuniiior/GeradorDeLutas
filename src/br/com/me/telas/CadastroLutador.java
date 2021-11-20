@@ -32,6 +32,8 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
     public CadastroLutador() {
         initComponents();
         pesquisandoCampeonato();
+        btAlterarUsuario.setEnabled(false);
+        btExcluirUsuario.setEnabled(false);
     }
 
     /**
@@ -56,7 +58,7 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
         varNome = new javax.swing.JTextField();
         varEstado = new javax.swing.JTextField();
         varNacionalidade = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btPesquisarCPF = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         varAltura = new javax.swing.JFormattedTextField();
@@ -137,14 +139,14 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
         kGradientPanel1.add(varEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, 223, -1));
         kGradientPanel1.add(varNacionalidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 223, -1));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/me/icones/icone pesquisar.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btPesquisarCPF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/me/icones/icone pesquisar.png"))); // NOI18N
+        btPesquisarCPF.setBorder(null);
+        btPesquisarCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btPesquisarCPFActionPerformed(evt);
             }
         });
-        kGradientPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 116, 34, 34));
+        kGradientPanel1.add(btPesquisarCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 116, 34, 34));
         kGradientPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 506, 10));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\marcelo jr\\Desktop\\icones\\podium.png")); // NOI18N
@@ -223,6 +225,11 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
         kGradientPanel1.add(btAlterarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 510, -1, -1));
 
         btExcluirUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/me/icones/icone deletar usuario.png"))); // NOI18N
+        btExcluirUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExcluirUsuarioActionPerformed(evt);
+            }
+        });
         kGradientPanel1.add(btExcluirUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 510, -1, -1));
 
         varID.setEnabled(false);
@@ -294,7 +301,7 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btAdicionarUsuarioActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btPesquisarCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarCPFActionPerformed
         AtletaDao atletaDao = new AtletaDao();
 
         String cpf = varPesquisar.getText().trim();
@@ -318,8 +325,10 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
         varCPF.setText(atletapesquisado.getCpf());
         varCampeonato.setSelectedItem(atletapesquisado.getCampeonato());
         btAdicionarUsuario.setEnabled(false);
+        btAlterarUsuario.setEnabled(true);
+        btExcluirUsuario.setEnabled(true);
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btPesquisarCPFActionPerformed
 
     private void btAlterarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarUsuarioActionPerformed
         if (!validandoatleta()) {
@@ -338,11 +347,15 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
             atleta.setEstado(varEstado.getText().trim());
             atleta.setCpf(varCPF.getText().trim());
             atleta.setTelefone(varCelular.getText().trim());
+            atleta.setCampeonato(idcampeonato.get(varCampeonato.getSelectedIndex()));
+
             AtletaDao atletaDao = new AtletaDao();
             boolean salvandoatleta = atletaDao.alterarAtleta(atleta);
             if (salvandoatleta == true) {
                 limparcampos();
                 btAdicionarUsuario.setEnabled(true);
+                btAlterarUsuario.setEnabled(false);
+                btExcluirUsuario.setEnabled(false);
             }
         }
     }//GEN-LAST:event_btAlterarUsuarioActionPerformed
@@ -350,6 +363,24 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
     private void varCampeonatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_varCampeonatoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_varCampeonatoActionPerformed
+
+    private void btExcluirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirUsuarioActionPerformed
+        AtletaDao atletaDao = new AtletaDao();
+        int id = Integer.parseInt(varID.getText().trim());
+        int confirmacao = JOptionPane.showConfirmDialog(null, "DESEJA MESMO EXCLUIR ESSE ATLETA?", "ATENÇÃOOO!!", JOptionPane.YES_NO_OPTION);
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            boolean excluido = atletaDao.DeletarAtleta(id);
+            if (excluido == true) {
+                JOptionPane.showMessageDialog(null, "Atleta excluido com sucesso!");
+                limparcampos();
+                btAdicionarUsuario.setEnabled(true);
+                btAlterarUsuario.setEnabled(false);
+                btExcluirUsuario.setEnabled(false);
+
+            }
+        }
+
+    }//GEN-LAST:event_btExcluirUsuarioActionPerformed
 
     public void limparcampos() {
         varAltura.setText("");
@@ -468,7 +499,7 @@ public class CadastroLutador extends javax.swing.JInternalFrame {
     private javax.swing.JButton btAdicionarUsuario;
     private javax.swing.JButton btAlterarUsuario;
     private javax.swing.JButton btExcluirUsuario;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btPesquisarCPF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JSeparator jSeparator1;

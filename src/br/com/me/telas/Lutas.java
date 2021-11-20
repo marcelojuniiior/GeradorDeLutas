@@ -181,7 +181,7 @@ public class Lutas extends javax.swing.JInternalFrame {
         arbitro = new javax.swing.JLabel();
         varArbitroFinal1 = new javax.swing.JComboBox<>();
         varArbitroFinal3 = new javax.swing.JLabel();
-        varVencedorFinal1 = new javax.swing.JComboBox<>();
+        varVencedorFinal = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -647,6 +647,11 @@ public class Lutas extends javax.swing.JInternalFrame {
         });
 
         btSalvarFinal.setText("Salvar");
+        btSalvarFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalvarFinalActionPerformed(evt);
+            }
+        });
 
         arbitro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         arbitro.setText("Arbitro:");
@@ -677,7 +682,7 @@ public class Lutas extends javax.swing.JInternalFrame {
                                 .addComponent(varArbitroFinal3))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(abaCampFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(varVencedorFinal1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(varVencedorFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(abaCampFinalLayout.createSequentialGroup()
                                     .addComponent(varFinal2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -713,7 +718,7 @@ public class Lutas extends javax.swing.JInternalFrame {
                     .addComponent(varArbitroFinal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(abaCampFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(varVencedorFinal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(varVencedorFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(varArbitroFinal3))
                 .addGap(32, 32, 32)
                 .addComponent(btSalvarFinal)
@@ -823,16 +828,16 @@ public class Lutas extends javax.swing.JInternalFrame {
                 varVencedor6.addItem(atletasPesquisados.getString("nome"));
                 varVencedor7.addItem(atletasPesquisados.getString("nome"));
                 varVencedor8.addItem(atletasPesquisados.getString("nome"));
-                
+
                 varVencedorQuartas1.addItem(atletasPesquisados.getString("nome"));
                 varVencedorQuartas2.addItem(atletasPesquisados.getString("nome"));
                 varVencedorQuartas3.addItem(atletasPesquisados.getString("nome"));
                 varVencedorQuartas4.addItem(atletasPesquisados.getString("nome"));
-                
+
                 varVencedorSemi1.addItem(atletasPesquisados.getString("nome"));
                 varVencedorSemi2.addItem(atletasPesquisados.getString("nome"));
-               
-                varVencedorFinal1.addItem(atletasPesquisados.getString("nome"));
+
+                varVencedorFinal.addItem(atletasPesquisados.getString("nome"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "erro ao pesquisar atletacampeonato" + ex);
@@ -851,10 +856,10 @@ public class Lutas extends javax.swing.JInternalFrame {
         salvarLuta6Fase1(campeonato);
         salvarLuta7Fase1(campeonato);
         salvarLuta8Fase1(campeonato);
-        
+
         lutasQuartasDeFinais();
         this.tblCamp.setSelectedIndex(3);
-        
+
 
     }//GEN-LAST:event_btSalvarLutasActionPerformed
 
@@ -867,34 +872,57 @@ public class Lutas extends javax.swing.JInternalFrame {
         Campeonato campeonato = new Campeonato();
         campeonato.setId(Integer.parseInt(varIDpesquisa.getText().trim()));
         lutaDao.salvandofase("QuartasFinal", campeonato);
-        
+
         salvandoQuartas1();
         salvandoQuartas2();
         salvandoQuartas3();
         salvandoQuartas4();
-        
+
         lutasSemiFinais();
         this.tblCamp.setSelectedIndex(4);
     }//GEN-LAST:event_btQuartasSalvarActionPerformed
 
     private void varBtSemiSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_varBtSemiSalvarActionPerformed
-       LutaDao lutaDao = new LutaDao();
+        LutaDao lutaDao = new LutaDao();
         Campeonato campeonato = new Campeonato();
         campeonato.setId(Integer.parseInt(varIDpesquisa.getText().trim()));
         lutaDao.salvandofase("SemiFinal", campeonato);
-        
+
         salvandoSemi1();
         salvandoSemi2();
-        
-        
+
         lutasFinal();
         this.tblCamp.setSelectedIndex(5);
     }//GEN-LAST:event_varBtSemiSalvarActionPerformed
-   public void lutasFinal(){
-       varFinal1.setText(varVencedorSemi1.getSelectedItem().toString());
-       varFinal2.setText(varVencedorSemi2.getSelectedItem().toString());
-   }
-    public void salvandoSemi2(){
+
+    private void btSalvarFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarFinalActionPerformed
+        LutaDao lutaDao = new LutaDao();
+        Campeonato campeonato = new Campeonato();
+        campeonato.setId(Integer.parseInt(varIDpesquisa.getText().trim()));
+        lutaDao.salvandofase("Final", campeonato);
+
+        salvandoFinal();
+        JOptionPane.showMessageDialog(null, "O atleta: " + varVencedorFinal.getSelectedItem().toString() + " Foi o Campeoão!!!!");
+    }//GEN-LAST:event_btSalvarFinalActionPerformed
+    public void salvandoFinal(){
+        LutaDao lutaDao = new LutaDao();
+        Luta luta = new Luta();
+
+        luta.setAtletaa1(varFinal1.getText().trim());
+        luta.setAtletaa2(varFinal2.getText().trim());
+        luta.setArbitroo(varArbitroFinal1.getSelectedItem().toString());
+        luta.setCampeonato(Integer.parseInt(varIDpesquisa.getText().trim()));
+        luta.setFasee("Final");
+        luta.setVencedor(idatleta.get(varVencedorFinal.getSelectedIndex()));
+        lutaDao.salvandoVencedores2(luta);
+    }
+    
+    public void lutasFinal() {
+        varFinal1.setText(varVencedorSemi1.getSelectedItem().toString());
+        varFinal2.setText(varVencedorSemi2.getSelectedItem().toString());
+    }
+
+    public void salvandoSemi2() {
         LutaDao lutaDao = new LutaDao();
         Luta luta = new Luta();
 
@@ -905,8 +933,9 @@ public class Lutas extends javax.swing.JInternalFrame {
         luta.setFasee("SemiFinal");
         luta.setVencedor(idatleta.get(varVencedorSemi2.getSelectedIndex()));
         lutaDao.salvandoVencedores2(luta);
-   }
-    public void salvandoSemi1(){
+    }
+
+    public void salvandoSemi1() {
         LutaDao lutaDao = new LutaDao();
         Luta luta = new Luta();
 
@@ -917,8 +946,9 @@ public class Lutas extends javax.swing.JInternalFrame {
         luta.setFasee("SemiFinal");
         luta.setVencedor(idatleta.get(varVencedorSemi1.getSelectedIndex()));
         lutaDao.salvandoVencedores2(luta);
-   }
-    public void salvandoQuartas1(){
+    }
+
+    public void salvandoQuartas1() {
         LutaDao lutaDao = new LutaDao();
         Luta luta = new Luta();
 
@@ -930,7 +960,8 @@ public class Lutas extends javax.swing.JInternalFrame {
         luta.setVencedor(idatleta.get(varVencedorQuartas1.getSelectedIndex()));
         lutaDao.salvandoVencedores2(luta);
     }
-    public void salvandoQuartas2(){
+
+    public void salvandoQuartas2() {
         LutaDao lutaDao = new LutaDao();
         Luta luta = new Luta();
 
@@ -942,7 +973,8 @@ public class Lutas extends javax.swing.JInternalFrame {
         luta.setVencedor(idatleta.get(varVencedorQuartas2.getSelectedIndex()));
         lutaDao.salvandoVencedores2(luta);
     }
-    public void salvandoQuartas3(){
+
+    public void salvandoQuartas3() {
         LutaDao lutaDao = new LutaDao();
         Luta luta = new Luta();
 
@@ -954,7 +986,8 @@ public class Lutas extends javax.swing.JInternalFrame {
         luta.setVencedor(idatleta.get(varVencedorQuartas3.getSelectedIndex()));
         lutaDao.salvandoVencedores2(luta);
     }
-    public void salvandoQuartas4(){
+
+    public void salvandoQuartas4() {
         LutaDao lutaDao = new LutaDao();
         Luta luta = new Luta();
 
@@ -966,30 +999,33 @@ public class Lutas extends javax.swing.JInternalFrame {
         luta.setVencedor(idatleta.get(varVencedorQuartas4.getSelectedIndex()));
         lutaDao.salvandoVencedores2(luta);
     }
-    public void lutasSemiFinais(){
+
+    public void lutasSemiFinais() {
         varSemi1Luta1.setText(varVencedorQuartas1.getSelectedItem().toString());
         varSemi2Luta1.setText(varVencedorQuartas2.getSelectedItem().toString());
-        
+
         varSemi1Luta2.setText(varVencedorQuartas3.getSelectedItem().toString());
         varSemi2Luta2.setText(varVencedorQuartas4.getSelectedItem().toString());
     }
-    public void lutasQuartasDeFinais(){
+
+    public void lutasQuartasDeFinais() {
         varQuartas1Luta1.setText(varVencedor1.getSelectedItem().toString());
         varQuartas2Luta1.setText(varVencedor2.getSelectedItem().toString());
-        
+
         varQuartas1Luta2.setText(varVencedor3.getSelectedItem().toString());
         varQuartas2Luta2.setText(varVencedor4.getSelectedItem().toString());
-        
+
         varQuartas1Luta3.setText(varVencedor5.getSelectedItem().toString());
         varQuartas2Luta3.setText(varVencedor6.getSelectedItem().toString());
-        
+
         varQuartas1Luta4.setText(varVencedor7.getSelectedItem().toString());
         varQuartas2Luta4.setText(varVencedor8.getSelectedItem().toString());
     }
+
     public void salvarLuta1Fase1(Campeonato campeonato) {
         LutaDao lutaDao = new LutaDao();
         Luta luta = new Luta();
-        
+
         luta.setAtleta1(idluta.get(0));
         luta.setAtleta2(idluta.get(1));
         luta.setArbitro(idarbitro.get(varArbitroLt1.getSelectedIndex()));
@@ -1050,6 +1086,7 @@ public class Lutas extends javax.swing.JInternalFrame {
         lutaDao.salvandoVencedores1(luta);
 
     }
+
     public void salvarLuta4Fase1(Campeonato campeonato) {
         LutaDao lutaDao = new LutaDao();
         Luta luta = new Luta();
@@ -1071,6 +1108,7 @@ public class Lutas extends javax.swing.JInternalFrame {
         lutaDao.salvandoVencedores1(luta);
 
     }
+
     public void salvarLuta5Fase1(Campeonato campeonato) {
         LutaDao lutaDao = new LutaDao();
         Luta luta = new Luta();
@@ -1092,6 +1130,7 @@ public class Lutas extends javax.swing.JInternalFrame {
         lutaDao.salvandoVencedores1(luta);
 
     }
+
     public void salvarLuta6Fase1(Campeonato campeonato) {
         LutaDao lutaDao = new LutaDao();
         Luta luta = new Luta();
@@ -1113,6 +1152,7 @@ public class Lutas extends javax.swing.JInternalFrame {
         lutaDao.salvandoVencedores1(luta);
 
     }
+
     public void salvarLuta7Fase1(Campeonato campeonato) {
         LutaDao lutaDao = new LutaDao();
         Luta luta = new Luta();
@@ -1134,6 +1174,7 @@ public class Lutas extends javax.swing.JInternalFrame {
         lutaDao.salvandoVencedores1(luta);
 
     }
+
     public void salvarLuta8Fase1(Campeonato campeonato) {
         LutaDao lutaDao = new LutaDao();
         Luta luta = new Luta();
@@ -1155,7 +1196,6 @@ public class Lutas extends javax.swing.JInternalFrame {
         lutaDao.salvandoVencedores1(luta);
 
     }
-    
 
     public void pesquisandoArbitroCampeonato() {
         int id = Integer.parseInt(varIDpesquisa.getText().trim());
@@ -1269,18 +1309,18 @@ public class Lutas extends javax.swing.JInternalFrame {
                 varArbitroLt6.addItem(resultadopesquisa.getString("nome"));
                 varArbitroLt7.addItem(resultadopesquisa.getString("nome"));
                 varArbitroLt8.addItem(resultadopesquisa.getString("nome"));
-                
+
                 varArbitroQuartas1.addItem(resultadopesquisa.getString("nome"));
                 varArbitroQuartas2.addItem(resultadopesquisa.getString("nome"));
                 varArbitroQuartas3.addItem(resultadopesquisa.getString("nome"));
                 varArbitroQuartas4.addItem(resultadopesquisa.getString("nome"));
-                
+
                 varArbitroSemi1.addItem(resultadopesquisa.getString("nome"));
                 varArbitroSemi2.addItem(resultadopesquisa.getString("nome"));
-                
+
                 varArbitroFinal1.addItem(resultadopesquisa.getString("nome"));
                 idarbitro.addElement(resultadopesquisa.getInt("id"));
-                
+
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao pesquisar ArbitroCampeonato");
@@ -1499,7 +1539,7 @@ public class Lutas extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> varVencedor6;
     private javax.swing.JComboBox<String> varVencedor7;
     private javax.swing.JComboBox<String> varVencedor8;
-    private javax.swing.JComboBox<String> varVencedorFinal1;
+    private javax.swing.JComboBox<String> varVencedorFinal;
     private javax.swing.JComboBox<String> varVencedorQuartas1;
     private javax.swing.JComboBox<String> varVencedorQuartas2;
     private javax.swing.JComboBox<String> varVencedorQuartas3;

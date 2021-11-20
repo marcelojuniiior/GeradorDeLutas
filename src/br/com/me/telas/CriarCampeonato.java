@@ -61,6 +61,8 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
         btPesquisar = new javax.swing.JButton();
         Aberto = new javax.swing.JRadioButton();
         Fechado = new javax.swing.JRadioButton();
+        nome1 = new javax.swing.JLabel();
+        varID2 = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -81,8 +83,8 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
 
         nome.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         nome.setForeground(new java.awt.Color(255, 255, 255));
-        nome.setText("Nome:");
-        kGradientPanel1.add(nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, 23));
+        nome.setText("ID:");
+        kGradientPanel1.add(nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 23));
 
         logradouro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         logradouro.setForeground(new java.awt.Color(255, 255, 255));
@@ -118,12 +120,15 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
         });
         kGradientPanel1.add(varLogradouro, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 300, -1));
         kGradientPanel1.add(varNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 300, -1));
+
+        varID.setToolTipText("DIGITE O NOME DO CAMPEONATO");
         kGradientPanel1.add(varID, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 260, -1));
 
         id.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         id.setForeground(new java.awt.Color(255, 255, 255));
-        id.setText("ID:");
-        kGradientPanel1.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, -1, -1));
+        id.setText("Nome:");
+        id.setToolTipText("DIGITE O NOME DO CAMPEONATO");
+        kGradientPanel1.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
         kGradientPanel1.add(separador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 490, 10));
         kGradientPanel1.add(separador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 500, 10));
 
@@ -165,6 +170,7 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
         kGradientPanel1.add(varValorInscricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 300, -1));
 
         btPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/me/icones/icone pesquisar.png"))); // NOI18N
+        btPesquisar.setToolTipText("DIGITE O NOME DO CAMPEONATO");
         btPesquisar.setBorder(null);
         btPesquisar.setBorderPainted(false);
         btPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -186,6 +192,14 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
         buttonGroup1.add(Fechado);
         Fechado.setText("Fechado");
         kGradientPanel1.add(Fechado, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, -1));
+
+        nome1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        nome1.setForeground(new java.awt.Color(255, 255, 255));
+        nome1.setText("Nome:");
+        kGradientPanel1.add(nome1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, 23));
+
+        varID2.setEnabled(false);
+        kGradientPanel1.add(varID2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 100, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -236,11 +250,12 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
         if(valorid.equals("")){
             JOptionPane.showMessageDialog(null, "Digite o ID!");
         }
-        campeonato.setId(Integer.parseInt(varID.getText().trim()));
-        Campeonato pesquisa = campeonatoDao.pesquisarIDCampeonato(campeonato);
+        campeonato.setNome(varID.getText().trim());
+        Campeonato pesquisa = campeonatoDao.pesquisarNomeCampeonato(campeonato);
         if(pesquisa == null){
              JOptionPane.showMessageDialog(null, "Nenhum campeonato foi encontrado");
         }
+        varID2.setText(pesquisa.getId().toString());
         varNome.setText(pesquisa.getNome());
         varDtCampeonato.setText(pesquisa.getDtcampeonato());
         varNumero.setText(pesquisa.getNumero());
@@ -262,6 +277,7 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
         if (!validandoCampeonato()) {
+            campeonato.setId(Integer.parseInt(varID2.getText().trim()));
             campeonato.setNome(varNome.getText().trim());
             campeonato.setDtcampeonato(varDtCampeonato.getText().trim());
             campeonato.setLogradouro(varLogradouro.getText().trim());
@@ -281,7 +297,7 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
     private void btDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeletarActionPerformed
         int excluir = JOptionPane.showConfirmDialog(null, "Tem certeza que quer excluir esse Campeonato?", "ATENÇÃO", JOptionPane.YES_NO_OPTION);
         if (excluir == JOptionPane.YES_OPTION) {
-            String id = varID.getText().trim();
+            String id = varID2.getText().trim();
             campeonato.setId(Integer.parseInt(id));
 
             boolean deletarCamp = campeonatoDao.deletarCampeonato(campeonato);
@@ -296,6 +312,7 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_AbertoActionPerformed
 
     public void limparcampos() {
+        varID2.setText("");
         varID.setText("");
         varDtCampeonato.setText("");
         varLogradouro.setText("");
@@ -395,6 +412,7 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel logradouro;
     private javax.swing.JLabel nome;
+    private javax.swing.JLabel nome1;
     private javax.swing.JLabel numero;
     private javax.swing.JSeparator separador1;
     private javax.swing.JSeparator separador2;
@@ -402,6 +420,7 @@ public class CriarCampeonato extends javax.swing.JInternalFrame {
     private javax.swing.JLabel valor;
     private javax.swing.JFormattedTextField varDtCampeonato;
     private javax.swing.JTextField varID;
+    private javax.swing.JTextField varID2;
     private javax.swing.JTextField varLogradouro;
     private javax.swing.JTextField varNome;
     private javax.swing.JTextField varNumero;

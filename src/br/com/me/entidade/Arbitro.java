@@ -18,33 +18,19 @@ public class Arbitro {
     private String estado;
     private String cpf;
     private String telefone;
-    private String campeonato;
-
-    public Arbitro(String nome, String dtnascimento, String nacionalidade, String estado, String cpf, String telefone, String campeonato) {
-       
-        this.nome = nome;
-        this.dtnascimento = dtnascimento;
-        this.nacionalidade = nacionalidade;
-        this.estado = estado;
-        this.cpf = cpf;
-        this.telefone = telefone;
-        this.campeonato = campeonato;
-    }
+    private int campeonato;
 
     public Arbitro() {
        
     }
-    
-    
 
-    public String getCampeonato() {
+    public int getCampeonato() {
         return campeonato;
     }
 
-    public void setCampeonato(String campeonato) {
+    public void setCampeonato(int campeonato) {
         this.campeonato = campeonato;
     }
-
     
     
     public String getCpf() {

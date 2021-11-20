@@ -7,18 +7,60 @@ package br.com.me.telas;
 
 import br.com.me.DAO.ArbitroDao;
 import br.com.me.entidade.Arbitro;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
  * @author marcelo jr
  */
-public class TelaPrincipal extends javax.swing.JFrame {
+public class TelaPrincipal extends javax.swing.JFrame implements Runnable {
+
+    String hora, minuto, segundo;
+    Thread hilo;
 
     /**
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
         initComponents();
+        hilo = new Thread(this);
+        hilo.start();
+        setVisible(true);
+    }
+
+    private void hora() {
+        Date data = new Date();
+        SimpleDateFormat formatado = new SimpleDateFormat("hh:mm:ss");
+        varHora.setText(formatado.format(data));
+    }
+
+    private void data() {
+        Date data = new Date();
+        DateFormat formatador = DateFormat.getDateInstance(DateFormat.DEFAULT);
+        System.out.println(formatador);
+        varData.setText(formatador.format(data));
+    }
+
+    public void hora2() {
+        Calendar calendario = new GregorianCalendar();
+        Date horaatual = new Date();
+        calendario.setTime(horaatual);
+        hora = calendario.get(Calendar.HOUR_OF_DAY) > 9 ? "" + calendario.get(Calendar.HOUR_OF_DAY) : "0" + calendario.get(Calendar.HOUR_OF_DAY);
+        minuto = calendario.get(Calendar.MINUTE) > 9 ? "" + calendario.get(Calendar.MINUTE) : "0" + calendario.get(Calendar.MINUTE);
+        segundo = calendario.get(Calendar.SECOND) > 9 ? "" + calendario.get(Calendar.SECOND) : "0" + calendario.get(Calendar.SECOND);
+    }
+
+    public void run() {
+        Thread current = Thread.currentThread();
+
+        while (current == hilo) {
+            hora2();
+            varHora.setText(hora + ":" + minuto + ":" + segundo);
+        }
     }
 
     /**
@@ -33,9 +75,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         kGradientPanel2 = new keeptoo.KGradientPanel();
         varDesktop = new javax.swing.JDesktopPane();
         varLogo = new javax.swing.JLabel();
-        varBoasVindas = new javax.swing.JLabel();
         varData = new javax.swing.JLabel();
         varHora = new javax.swing.JLabel();
+        varUsuario = new javax.swing.JLabel();
         MenuPrincipal = new javax.swing.JMenuBar();
         MenuCamp = new javax.swing.JMenu();
         MenuCampCriar = new javax.swing.JMenuItem();
@@ -43,13 +85,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuCadastro = new javax.swing.JMenu();
         MenuCadastroLutador = new javax.swing.JMenuItem();
         MenuCadastroArbitro = new javax.swing.JMenuItem();
-        ManuCadastroAtlCamp = new javax.swing.JRadioButtonMenuItem();
         MenuHist = new javax.swing.JMenu();
         MenuAjuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerador de campeonato v2021");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         kGradientPanel2.setkEndColor(new java.awt.Color(255, 255, 255));
         kGradientPanel2.setkStartColor(new java.awt.Color(0, 0, 0));
@@ -73,14 +119,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
         varLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/me/icones/logo integrador.png"))); // NOI18N
         kGradientPanel2.add(varLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 0, -1, -1));
 
-        varBoasVindas.setText("Bem vindo, Nome");
-        kGradientPanel2.add(varBoasVindas, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 240, 92, -1));
-
+        varData.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        varData.setForeground(new java.awt.Color(255, 255, 255));
         varData.setText("Data");
         kGradientPanel2.add(varData, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, -1, -1));
 
+        varHora.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        varHora.setForeground(new java.awt.Color(255, 255, 255));
         varHora.setText("Hora");
-        kGradientPanel2.add(varHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 270, -1, -1));
+        kGradientPanel2.add(varHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 260, -1, -1));
+
+        varUsuario.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        varUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        varUsuario.setText("usuario");
+        kGradientPanel2.add(varUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 230, -1, -1));
 
         MenuCamp.setText("Campeonato");
 
@@ -124,16 +176,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         MenuCadastro.add(MenuCadastroArbitro);
 
-        ManuCadastroAtlCamp.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
-        ManuCadastroAtlCamp.setSelected(true);
-        ManuCadastroAtlCamp.setText("AtletaCampeonato");
-        ManuCadastroAtlCamp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ManuCadastroAtlCampActionPerformed(evt);
-            }
-        });
-        MenuCadastro.add(ManuCadastroAtlCamp);
-
         MenuPrincipal.add(MenuCadastro);
 
         MenuHist.setText("Histórico");
@@ -148,27 +190,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
+            .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(794, 697));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void MenuCadastroLutadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCadastroLutadorActionPerformed
-            CadastroLutador cadastroLutador = new CadastroLutador();
-            cadastroLutador.setVisible(true);
-            varDesktop.add(cadastroLutador);
+        CadastroLutador cadastroLutador = new CadastroLutador();
+        cadastroLutador.setVisible(true);
+        varDesktop.add(cadastroLutador);
     }//GEN-LAST:event_MenuCadastroLutadorActionPerformed
 
     private void MenuCampCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCampCriarActionPerformed
-       CriarCampeonato campeonato = new CriarCampeonato();
-       campeonato.setVisible(true);
-       varDesktop.add(campeonato);
+        CriarCampeonato campeonato = new CriarCampeonato();
+        campeonato.setVisible(true);
+        varDesktop.add(campeonato);
     }//GEN-LAST:event_MenuCampCriarActionPerformed
 
     private void MenuCampLutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCampLutasActionPerformed
@@ -178,17 +220,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuCampLutasActionPerformed
 
     private void MenuCadastroArbitroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCadastroArbitroActionPerformed
-      CadastroArbitro arbitro = new CadastroArbitro();
-      arbitro.setVisible(true);
-      varDesktop.add(arbitro);
-              
+        CadastroArbitro arbitro = new CadastroArbitro();
+        arbitro.setVisible(true);
+        varDesktop.add(arbitro);
+
     }//GEN-LAST:event_MenuCadastroArbitroActionPerformed
 
-    private void ManuCadastroAtlCampActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManuCadastroAtlCampActionPerformed
-       AtletaCampeonato atletaCampeonato = new AtletaCampeonato();
-       atletaCampeonato.setVisible(true);
-       varDesktop.add(atletaCampeonato);
-    }//GEN-LAST:event_ManuCadastroAtlCampActionPerformed
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+       data();
+       run();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -226,7 +267,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButtonMenuItem ManuCadastroAtlCamp;
     private javax.swing.JMenu MenuAjuda;
     private javax.swing.JMenu MenuCadastro;
     private javax.swing.JMenuItem MenuCadastroArbitro;
@@ -237,10 +277,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu MenuHist;
     private javax.swing.JMenuBar MenuPrincipal;
     private keeptoo.KGradientPanel kGradientPanel2;
-    private javax.swing.JLabel varBoasVindas;
     private javax.swing.JLabel varData;
     private javax.swing.JDesktopPane varDesktop;
     private javax.swing.JLabel varHora;
     private javax.swing.JLabel varLogo;
+    public static javax.swing.JLabel varUsuario;
     // End of variables declaration//GEN-END:variables
 }

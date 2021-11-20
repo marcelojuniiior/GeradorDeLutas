@@ -66,15 +66,16 @@ public class CampeonatoDao {
         return false;
     }
 
-    public Campeonato pesquisarIDCampeonato(Campeonato campeonato) {
-        String sql = "SELECT * FROM campeonato where idcampeonato =?";
+    public Campeonato pesquisarNomeCampeonato(Campeonato campeonato) {
+        String sql = "SELECT * FROM campeonato where nome =?";
         try {
             conexao = FabricaConexao.abrirConexao();
             prepararsql = conexao.prepareStatement(sql);
-            prepararsql.setInt(1, campeonato.getId());
+            prepararsql.setString(1, campeonato.getNome());
             resultado = prepararsql.executeQuery();
             if (resultado.next()) {
                 campeonato = new Campeonato();
+                campeonato.setId(resultado.getInt("idcampeonato"));
                 campeonato.setNome(resultado.getString("nome"));
                 campeonato.setDtcampeonato(resultado.getString("dtcampeonato"));
                 campeonato.setLogradouro(resultado.getString("logradouro"));
@@ -90,11 +91,11 @@ public class CampeonatoDao {
     }
 
     public boolean deletarCampeonato(Campeonato campeonato) {
-        String sql = "DELETE FROM campeonato WHERE idcampeonato=?";
+        String sql = "DELETE FROM campeonato WHERE nome=?";
         try {
             conexao = FabricaConexao.abrirConexao();
             prepararsql = conexao.prepareStatement(sql);
-            prepararsql.setInt(1, campeonato.getId());
+            prepararsql.setString(1, campeonato.getNome());
             prepararsql.executeUpdate();
             JOptionPane.showMessageDialog(null, "Campeonato Deletado com sucesso");
             return true;

@@ -92,7 +92,7 @@ public class LutaDao {
         }
         }
      public void salvandoVencedores2(Luta luta) {
-        String sql = "INSERT INTO lutas2 (atleta1,atleta2,arbitro,fase,idcampeonato,idvencedor) values (?, ? ,? , ?, ?, ?)";
+        String sql = "INSERT INTO luta2 (atleta1,atleta2,arbitro,fase,idcampeonato,idvencedor) values (?, ? ,? , ?, ?, ?)";
         try {
             conexao = FabricaConexao.abrirConexao();
             prepararsql = conexao.prepareStatement(sql);

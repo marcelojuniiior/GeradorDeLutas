@@ -6,6 +6,7 @@
 package br.com.me.DAO;
 
 import br.com.me.entidade.Atleta;
+import br.com.me.entidade.Campeonato;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -54,7 +55,7 @@ public class AtletaDao {
 
     public boolean alterarAtleta(Atleta atleta) {
         String sql = "UPDATE atleta SET nome = ?, dtnascimento = ?,"
-                + " altura = ?, peso = ?, nacionalidade = ?, estado = ?, categoria = ?, cpf = ?, telefone = ?, campeonato = ? WHERE idatleta = ?";
+                + " altura = ?, peso = ?, nacionalidade = ?, estado = ?, categoria = ?, cpf = ?, telefone = ?, idcampeonato = ? WHERE idatleta = ?";
         try {
             conexao = FabricaConexao.abrirConexao();
             prepararSql = conexao.prepareStatement(sql);
@@ -98,27 +99,30 @@ public class AtletaDao {
                 atleta.setCategoria(resultado.getString("Categoria"));
                 atleta.setCpf(resultado.getString("Cpf"));
                 atleta.setTelefone(resultado.getString("Telefone"));
-                atleta.setCampeonato(resultado.getInt("campeonato"));
+                atleta.setCampeonato(resultado.getInt("idcampeonato"));
                 return atleta;
             }
 
         } catch (Exception e) {
-            System.out.println("Erro ao pesquisar Atletas por CPF " + e.getMessage());
+            JOptionPane.showMessageDialog(null,"Erro ao pesquisar Atletas por CPF " + e.getMessage());
         }
         return null;
     }
     
-    public void excluir(int id) {
+    public boolean DeletarAtleta(int id) {
         String sql = "DELETE FROM atleta WHERE idatleta = ?";
         try {
             conexao = FabricaConexao.abrirConexao();
             prepararSql = conexao.prepareStatement(sql);
             prepararSql.setInt(1, id);
-            int x = prepararSql.executeUpdate();
-            System.out.println("XXX " + x);
+           int confirmacao = prepararSql.executeUpdate();
+           if(confirmacao == 1){
+               return true;
+           }
         } catch (Exception e) {
-            System.out.println("Erro ao excluir " + e.getMessage());
+            JOptionPane.showMessageDialog(null,"Erro ao DELETAR ATLETA " + e.getMessage());
         }
+        return false;
     }
 
 }
