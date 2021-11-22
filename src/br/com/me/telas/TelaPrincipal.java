@@ -85,8 +85,6 @@ public class TelaPrincipal extends javax.swing.JFrame implements Runnable {
         MenuCadastro = new javax.swing.JMenu();
         MenuCadastroLutador = new javax.swing.JMenuItem();
         MenuCadastroArbitro = new javax.swing.JMenuItem();
-        MenuHist = new javax.swing.JMenu();
-        MenuAjuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerador de campeonato v2021");
@@ -178,12 +176,6 @@ public class TelaPrincipal extends javax.swing.JFrame implements Runnable {
 
         MenuPrincipal.add(MenuCadastro);
 
-        MenuHist.setText("Histórico");
-        MenuPrincipal.add(MenuHist);
-
-        MenuAjuda.setText("Ajuda");
-        MenuPrincipal.add(MenuAjuda);
-
         setJMenuBar(MenuPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -267,14 +259,12 @@ public class TelaPrincipal extends javax.swing.JFrame implements Runnable {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu MenuAjuda;
     private javax.swing.JMenu MenuCadastro;
     private javax.swing.JMenuItem MenuCadastroArbitro;
     private javax.swing.JMenuItem MenuCadastroLutador;
     private javax.swing.JMenu MenuCamp;
     private javax.swing.JMenuItem MenuCampCriar;
     private javax.swing.JMenuItem MenuCampLutas;
-    private javax.swing.JMenu MenuHist;
     private javax.swing.JMenuBar MenuPrincipal;
     private keeptoo.KGradientPanel kGradientPanel2;
     private javax.swing.JLabel varData;
